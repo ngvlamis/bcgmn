@@ -171,6 +171,28 @@ body {
   min-height: 1.5em;
 }
 
+.group-photo {
+  margin: 0 0 2rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.group-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.group-photo figcaption {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  min-height: 1em;
+}
+
 .home-about {
   font-size: 0.95rem;
   color: var(--text-muted);
