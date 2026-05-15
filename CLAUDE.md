@@ -52,6 +52,19 @@ Two behaviors:
 1. **Meeting expand/collapse** — toggles `hidden` on `.meeting-body` and `is-open` on `.meeting-card`
 2. **Standings sort** — re-sorts `<tbody>` rows by clicked column, re-numbers the rank cell, and re-applies the `top-three` class to the first three rows after each sort
 
+### Point system (standings)
+
+Computed in `standings.js` per calendar year:
+
+| Event | Points |
+|---|---|
+| Attending a meeting | 5 |
+| Each match win | 5 |
+| Bye | 2.5 |
+| Going 3-0 at a meeting | 5 split equally among all 3-0 finishers |
+
+"Attending" means appearing in at least one match (p1 or p2) at the meeting. Byes don't count toward the 3-0 record — only real match wins do. Primary sort is by total points; wins break ties.
+
 ### Adding data
 
 - **New meeting**: append an entry to `meetings.yaml`. Standings recalculate on next build.

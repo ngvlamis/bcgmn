@@ -1,7 +1,12 @@
+# Each meeting is a 3-round Swiss. List all matches flat; rounds are implicit.
+# Byes: omit p2 and set bye: true.
+# winner: must match p1 or p2 exactly.
+
 - id: "2026-01-08"
   date: "2026-01-08"
   location: "The Alcove, Astoria"
   matches:
+    # Round 1
     - p1: Nick Vlamis
       p2: Alice Chen
       winner: Alice Chen
@@ -10,26 +15,53 @@
       winner: Marco Diaz
     - p1: Tom Reilly
       p2: Yuki Tanaka
-      winner: Yuki Tanaka
+      winner: Tom Reilly
+    # Round 2
+    - p1: Alice Chen
+      p2: Marco Diaz
+      winner: Alice Chen
+    - p1: Tom Reilly
+      p2: Nick Vlamis
+      winner: Tom Reilly
+    - p1: Sandra Park
+      p2: Yuki Tanaka
+      winner: Sandra Park
+    # Round 3
+    - p1: Alice Chen
+      p2: Tom Reilly
+      winner: Alice Chen
+    - p1: Marco Diaz
+      p2: Sandra Park
+      winner: Marco Diaz
+    - p1: Nick Vlamis
+      p2: Yuki Tanaka
+      winner: Nick Vlamis
 
 - id: "2026-01-22"
   date: "2026-01-22"
   location: "The Alcove, Astoria"
   matches:
+    # Round 1
     - p1: Nick Vlamis
       p2: Marco Diaz
       winner: Nick Vlamis
     - p1: Alice Chen
-      p2: Yuki Tanaka
+      p2: Tom Reilly
       winner: Alice Chen
     - p1: Sandra Park
-      p2: Tom Reilly
+      p2: Yuki Tanaka
       winner: Sandra Park
-
-- id: "2026-02-05"
-  date: "2026-02-05"
-  location: "The Alcove, Astoria"
-  matches:
+    # Round 2
+    - p1: Nick Vlamis
+      p2: Alice Chen
+      winner: Nick Vlamis
+    - p1: Sandra Park
+      p2: Marco Diaz
+      winner: Sandra Park
+    - p1: Tom Reilly
+      p2: Yuki Tanaka
+      winner: Tom Reilly
+    # Round 3
     - p1: Nick Vlamis
       p2: Sandra Park
       winner: Nick Vlamis
@@ -38,32 +70,4 @@
       winner: Alice Chen
     - p1: Marco Diaz
       p2: Yuki Tanaka
-      winner: Yuki Tanaka
-
-- id: "2026-02-19"
-  date: "2026-02-19"
-  location: "The Alcove, Astoria"
-  matches:
-    - p1: Nick Vlamis
-      p2: Tom Reilly
-      winner: Nick Vlamis
-    - p1: Alice Chen
-      p2: Marco Diaz
-      winner: Marco Diaz
-    - p1: Sandra Park
-      p2: Yuki Tanaka
-      winner: Sandra Park
-
-- id: "2026-03-05"
-  date: "2026-03-05"
-  location: "The Alcove, Astoria"
-  matches:
-    - p1: Nick Vlamis
-      p2: Yuki Tanaka
-      winner: Nick Vlamis
-    - p1: Alice Chen
-      p2: Sandra Park
-      winner: Alice Chen
-    - p1: Marco Diaz
-      p2: Tom Reilly
       winner: Marco Diaz
