@@ -45,7 +45,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 96px;
 }
 
 .nav-brand {
@@ -55,7 +55,7 @@ body {
 }
 
 .nav-logo {
-  height: 58px;
+  height: 82px;
   width: auto;
   display: block;
 }
@@ -69,7 +69,7 @@ body {
   color: var(--text-muted);
   text-decoration: none;
   padding: 0 1rem;
-  height: 72px;
+  height: 96px;
   display: flex;
   align-items: center;
   font-size: 0.875rem;
@@ -434,9 +434,9 @@ body {
 /* ── Responsive ── */
 
 @media (max-width: 540px) {
-  .nav-logo { height: 48px; }
-  .nav { height: 62px; }
-  .nav-links a { height: 62px; }
+  .nav-logo { height: 60px; }
+  .nav { height: 74px; }
+  .nav-links a { height: 74px; }
   .nav-links a { padding: 0 0.6rem; }
   .main { padding: 1.25rem 1rem; }
   .member-grid { grid-template-columns: 1fr; }
