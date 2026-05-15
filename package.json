@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "build": "eleventy",
-    "start": "eleventy --serve"
+    "start": "eleventy --serve",
+    "deploy": "eleventy && gh-pages -d _site"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "gh-pages": "^6.3.0",
     "js-yaml": "^4.1.0"
   }
 }
