@@ -1,0 +1,346 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f5f3ee;
+  --surface: #ffffff;
+  --border: #ddd8cc;
+  --text: #1c1c1c;
+  --text-muted: #6b6560;
+  --green: #1d3d2a;
+  --green-hover: #254d36;
+  --amber: #b5722c;
+  --radius: 6px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Nav ── */
+
+.nav {
+  background: var(--green);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+}
+
+.nav-brand {
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  transition: color 0.1s, background 0.1s;
+}
+
+.nav-links a:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Layout ── */
+
+.main {
+  flex: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  width: 100%;
+}
+
+.footer {
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ── Page header ── */
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.page-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.empty-state {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Meeting cards ── */
+
+.meeting-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.meeting-header {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 13px 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.meeting-header:hover {
+  background: #faf9f7;
+}
+
+.meeting-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meeting-date {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.meeting-location {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.meeting-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meeting-match-count {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.meeting-chevron {
+  color: var(--text-muted);
+  transition: transform 0.15s;
+  font-size: 0.85rem;
+}
+
+.meeting-card.is-open .meeting-chevron {
+  transform: rotate(180deg);
+}
+
+.meeting-body {
+  border-top: 1px solid var(--border);
+}
+
+/* ── Match table ── */
+
+.match-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.match-table th {
+  padding: 7px 16px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  background: #faf9f6;
+}
+
+.match-table td {
+  padding: 9px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.match-table td.is-winner {
+  font-weight: 600;
+}
+
+.match-table td.match-winner-col {
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* ── Standings table ── */
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.standings-table th {
+  background: var(--green);
+  color: white;
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.standings-table th[data-sort] {
+  cursor: pointer;
+}
+
+.standings-table th[data-sort]:hover {
+  background: var(--green-hover);
+}
+
+.standings-table th[aria-sort="ascending"]::after { content: " ↑"; }
+.standings-table th[aria-sort="descending"]::after { content: " ↓"; }
+
+.standings-table td {
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.standings-table tr:nth-child(even) td {
+  background: #faf9f6;
+}
+
+.standings-table tr.top-three:nth-child(1) td:first-child { color: #b5722c; font-weight: 700; }
+.standings-table tr.top-three:nth-child(2) td:first-child { color: #7c8ca0; font-weight: 700; }
+.standings-table tr.top-three:nth-child(3) td:first-child { color: #8b6b4a; font-weight: 700; }
+
+.standings-table a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.standings-table a:hover {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+/* ── Member grid ── */
+
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.member-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.member-avatar {
+  flex-shrink: 0;
+}
+
+.member-avatar img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.member-avatar-placeholder {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.member-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.member-rating {
+  font-size: 0.78rem;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.member-bio {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 6px;
+}
+
+.member-joined {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 540px) {
+  .nav-brand { font-size: 0.9rem; }
+  .nav-links a { padding: 0 0.6rem; }
+  .main { padding: 1.25rem 1rem; }
+  .member-grid { grid-template-columns: 1fr; }
+}

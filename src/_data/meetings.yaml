@@ -1,0 +1,69 @@
+- id: "2026-01-08"
+  date: "2026-01-08"
+  location: "The Alcove, Astoria"
+  matches:
+    - p1: Nick Vlamis
+      p2: Alice Chen
+      winner: Alice Chen
+    - p1: Marco Diaz
+      p2: Sandra Park
+      winner: Marco Diaz
+    - p1: Tom Reilly
+      p2: Yuki Tanaka
+      winner: Yuki Tanaka
+
+- id: "2026-01-22"
+  date: "2026-01-22"
+  location: "The Alcove, Astoria"
+  matches:
+    - p1: Nick Vlamis
+      p2: Marco Diaz
+      winner: Nick Vlamis
+    - p1: Alice Chen
+      p2: Yuki Tanaka
+      winner: Alice Chen
+    - p1: Sandra Park
+      p2: Tom Reilly
+      winner: Sandra Park
+
+- id: "2026-02-05"
+  date: "2026-02-05"
+  location: "The Alcove, Astoria"
+  matches:
+    - p1: Nick Vlamis
+      p2: Sandra Park
+      winner: Nick Vlamis
+    - p1: Alice Chen
+      p2: Tom Reilly
+      winner: Alice Chen
+    - p1: Marco Diaz
+      p2: Yuki Tanaka
+      winner: Yuki Tanaka
+
+- id: "2026-02-19"
+  date: "2026-02-19"
+  location: "The Alcove, Astoria"
+  matches:
+    - p1: Nick Vlamis
+      p2: Tom Reilly
+      winner: Nick Vlamis
+    - p1: Alice Chen
+      p2: Marco Diaz
+      winner: Marco Diaz
+    - p1: Sandra Park
+      p2: Yuki Tanaka
+      winner: Sandra Park
+
+- id: "2026-03-05"
+  date: "2026-03-05"
+  location: "The Alcove, Astoria"
+  matches:
+    - p1: Nick Vlamis
+      p2: Yuki Tanaka
+      winner: Nick Vlamis
+    - p1: Alice Chen
+      p2: Sandra Park
+      winner: Alice Chen
+    - p1: Marco Diaz
+      p2: Tom Reilly
+      winner: Marco Diaz

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} — {% endif %}{{ site.title }}</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <a href="/" class="nav-brand">{{ site.title }}</a>
+      <ul class="nav-links">
+        <li><a href="/">Schedule</a></li>
+        <li><a href="/standings/">Standings</a></li>
+        <li><a href="/members/">Members</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="main">
+    {{ content | safe }}
+  </main>
+  <footer class="footer">
+    <p>{{ site.title }} &middot; {{ site.year }}</p>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

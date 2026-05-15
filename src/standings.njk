@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+title: Standings
+---
+
+<div class="page-header">
+  <h1>{{ site.year }} Standings</h1>
+  <p class="page-subtitle">Click a column header to sort</p>
+</div>
+
+{% if standings | length %}
+<table class="standings-table" id="standings-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th data-sort="name" data-type="string">Player</th>
+      <th data-sort="wins" data-type="number">W</th>
+      <th data-sort="losses" data-type="number">L</th>
+      <th data-sort="played" data-type="number">GP</th>
+      <th data-sort="pct" data-type="number" aria-sort="descending">Win%</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for player in standings %}
+    <tr class="{{ 'top-three' if loop.index <= 3 }}">
+      <td>{{ loop.index }}</td>
+      <td><a href="/members/#{{ player.name | slugify }}">{{ player.name }}</a></td>
+      <td>{{ player.wins }}</td>
+      <td>{{ player.losses }}</td>
+      <td>{{ player.played }}</td>
+      <td>{{ (player.pct * 100) | round(1) }}%</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty-state">No match results recorded yet this year.</p>
+{% endif %}

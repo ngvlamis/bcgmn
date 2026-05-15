@@ -1,0 +1,5 @@
+---
+permalink: members.json
+eleventyExcludeFromCollections: true
+---
+[{% for member in members %}"{{ member.name }}"{% if not loop.last %},{% endif %}{% endfor %}]

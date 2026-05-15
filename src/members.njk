@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+title: Members
+---
+
+<div class="page-header">
+  <h1>Members</h1>
+</div>
+
+<div class="member-grid">
+  {% for member in members %}
+  <div class="member-card" id="{{ member.name | slugify }}">
+    <div class="member-avatar">
+      {% if member.photo %}
+      <img src="{{ member.photo }}" alt="{{ member.name }}">
+      {% else %}
+      <div class="member-avatar-placeholder">{{ member.name | first | upper }}</div>
+      {% endif %}
+    </div>
+    <div class="member-info">
+      <h2 class="member-name">{{ member.name }}</h2>
+      {% if member.rating %}
+      <div class="member-rating">Rating: {{ member.rating }}</div>
+      {% endif %}
+      {% if member.bio %}
+      <p class="member-bio">{{ member.bio }}</p>
+      {% endif %}
+      {% if member.joined %}
+      <div class="member-joined">Member since {{ member.joined | dateFormatMonth }}</div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
