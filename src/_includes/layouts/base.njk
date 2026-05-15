@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if title %}{{ title }} — {% endif %}{{ site.title }}</title>
+  <title>{% if title %}{{ title }} — {% endif %}{{ site.abbr }}</title>
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <nav class="nav">
-      <a href="/" class="nav-brand">{{ site.title }}</a>
+      <a href="/" class="nav-brand" aria-label="{{ site.title }}">
+        <img src="/assets/img/logo.jpg" alt="BCGMN logo" class="nav-logo">
+      </a>
       <ul class="nav-links">
         <li><a href="/">Schedule</a></li>
         <li><a href="/standings/">Standings</a></li>
