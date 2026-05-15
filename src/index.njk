@@ -1,53 +1,31 @@
 ---
 layout: layouts/base.njk
-title: Meeting Schedule
 ---
 
-<div class="page-header">
-  <h1>Meeting Schedule</h1>
-</div>
+<section class="hero">
+  <img src="/assets/img/logo.jpg" alt="BCGMN" class="hero-logo">
+  <h1 class="hero-title">Backgammon Club of the<br>Great Manhattan North</h1>
+  <p class="hero-tagline"><!-- tagline goes here --></p>
+</section>
 
-<div class="meetings">
-  {% for meeting in meetings | reverse %}
-  <div class="meeting-card" id="meeting-{{ meeting.id }}">
-    <button class="meeting-header" aria-expanded="false">
-      <div class="meeting-header-left">
-        <span class="meeting-date">{{ meeting.date | dateFormat }}</span>
-        <span class="meeting-location">{{ meeting.location }}</span>
-      </div>
-      <div class="meeting-header-right">
-        <span class="meeting-match-count">
-          {%- if meeting.matches -%}
-            {{ meeting.matches | length }} match{{ "es" if meeting.matches | length != 1 else "" }}
-          {%- else -%}
-            No results yet
-          {%- endif -%}
-        </span>
-        <span class="meeting-chevron" aria-hidden="true">▾</span>
-      </div>
-    </button>
-    {% if meeting.matches %}
-    <div class="meeting-body" hidden>
-      <table class="match-table">
-        <thead>
-          <tr>
-            <th>Player 1</th>
-            <th>Player 2</th>
-            <th>Winner</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for match in meeting.matches %}
-          <tr>
-            <td class="{{ 'is-winner' if match.winner == match.p1 }}">{{ match.p1 }}</td>
-            <td class="{{ 'is-winner' if match.winner == match.p2 }}">{{ match.p2 }}</td>
-            <td class="match-winner-col">{{ match.winner }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    {% endif %}
-  </div>
-  {% endfor %}
-</div>
+<section class="home-about">
+  <p><!-- about text goes here --></p>
+</section>
+
+<nav class="home-nav">
+  <a href="/schedule/" class="home-nav-card">
+    <span class="home-nav-icon">📅</span>
+    <span class="home-nav-label">Schedule</span>
+    <span class="home-nav-desc">Meeting dates and match results</span>
+  </a>
+  <a href="/standings/" class="home-nav-card">
+    <span class="home-nav-icon">🏆</span>
+    <span class="home-nav-label">Standings</span>
+    <span class="home-nav-desc">{{ site.year }} point totals and rankings</span>
+  </a>
+  <a href="/members/" class="home-nav-card">
+    <span class="home-nav-icon">👤</span>
+    <span class="home-nav-label">Members</span>
+    <span class="home-nav-desc">Club roster and player profiles</span>
+  </a>
+</nav>
