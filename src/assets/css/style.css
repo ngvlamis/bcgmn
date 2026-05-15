@@ -81,6 +81,17 @@ body {
   color: var(--red);
 }
 
+.nav-instagram {
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem !important;
+  color: var(--text-muted) !important;
+}
+
+.nav-instagram:hover {
+  color: var(--red) !important;
+}
+
 /* ── Layout ── */
 
 .main {
@@ -97,6 +108,15 @@ body {
   font-size: 0.8rem;
   color: var(--text-muted);
   border-top: 1px solid var(--border);
+}
+
+.footer a {
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: var(--red);
 }
 
 /* ── Page header ── */
