@@ -279,6 +279,28 @@ body {
   .hero-logo { height: 90px; }
 }
 
+/* ── Tournaments sections ── */
+
+.tournaments-section {
+  margin-bottom: 2.5rem;
+}
+
+.tournaments-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.tournaments-empty {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 /* ── Meeting cards ── */
 
 .meeting-card {
