@@ -8,7 +8,7 @@ title: Members
 </div>
 
 <div class="member-grid">
-  {% for member in members %}
+  {% for member in players.members %}
   <div class="member-card" id="{{ member.name | slugify }}">
     <div class="member-avatar">
       {% if member.photo %}
@@ -32,3 +32,33 @@ title: Members
   </div>
   {% endfor %}
 </div>
+
+{% if players.guests | length %}
+<div class="page-header page-header--section">
+  <h2>Guests</h2>
+  <p class="page-subtitle">Attended one event this year</p>
+</div>
+
+<div class="member-grid">
+  {% for guest in players.guests %}
+  <div class="member-card member-card--guest" id="{{ guest.name | slugify }}">
+    <div class="member-avatar">
+      {% if guest.photo %}
+      <img src="{{ guest.photo }}" alt="{{ guest.name }}">
+      {% else %}
+      <div class="member-avatar-placeholder">{{ guest.name | first | upper }}</div>
+      {% endif %}
+    </div>
+    <div class="member-info">
+      <h2 class="member-name">{{ guest.name }}</h2>
+      {% if guest.rating %}
+      <div class="member-rating">Rating: {{ guest.rating }}</div>
+      {% endif %}
+      {% if guest.bio %}
+      <p class="member-bio">{{ guest.bio }}</p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}

@@ -1,73 +1,544 @@
-# Each meeting is a 3-round Swiss. List all matches flat; rounds are implicit.
+# Each meeting is a 3-round Swiss.
 # Byes: omit p2 and set bye: true.
-# winner: must match p1 or p2 exactly.
+# w: 1 means p1 won, w: 2 means p2 won.
 
-- id: "2026-01-08"
-  date: "2026-01-08"
-  location: "The Alcove, Astoria"
-  matches:
-    # Round 1
-    - p1: Nick Vlamis
-      p2: Alice Chen
-      winner: Alice Chen
-    - p1: Marco Diaz
-      p2: Sandra Park
-      winner: Marco Diaz
-    - p1: Tom Reilly
-      p2: Yuki Tanaka
-      winner: Tom Reilly
-    # Round 2
-    - p1: Alice Chen
-      p2: Marco Diaz
-      winner: Alice Chen
-    - p1: Tom Reilly
-      p2: Nick Vlamis
-      winner: Tom Reilly
-    - p1: Sandra Park
-      p2: Yuki Tanaka
-      winner: Sandra Park
-    # Round 3
-    - p1: Alice Chen
-      p2: Tom Reilly
-      winner: Alice Chen
-    - p1: Marco Diaz
-      p2: Sandra Park
-      winner: Marco Diaz
-    - p1: Nick Vlamis
-      p2: Yuki Tanaka
-      winner: Nick Vlamis
+- name: "January 2026"
+  date: "2026-01-29"
+  location: "Le Cheile"
+  rounds:
+    - matches:
+        - p1: Jason Aingorn
+          p2: Louis Epstein
+          w: 1
+        - p1: Lou Carlascio
+          p2: Jeff Schwarz
+          w: 1
+        - p1: Jesse Chrismer
+          p2: Howard Linnemann-Schmidt
+          w: 2
+        - p1: Peter Geissler
+          p2: Makoto Nozaki
+          w: 2
+        - p1: Tim Flateman
+          p2: Dan Lee
+          w: 2
+        - p1: Abe Schechter
+          p2: Michihito Kageyama
+          w: 1
+        - p1: Noah Allen
+          p2: Phil Siler
+          w: 2
+        - p1: Nygel
+          p2: Bzo
+          w: 2
+        - p1: Mirna Abada
+          p2: Sam Rappaport
+          w: 2
+        - p1: Casey Ganfry
+          p2: Kal Karran
+          w: 1
+        - p1: Eddie Rodriguez
+          p2: Glen Konstantin
+          w: 1
+        - p1: Selwyn Scarborough
+          p2: Monty Haskins
+          w: 1
+    - matches:
+        - p1: Jason Aingorn
+          p2: Howard Linnemann-Schmidt
+          w: 2
+        - p1: Eddie Rodriguez
+          p2: Phil Siler
+          w: 1
+        - p1: Jeff Schwarz
+          p2: Noah Allen
+          w: 1
+        - p1: Nygel
+          p2: Jesse Chrismer
+          w: 2
+        - p1: Abe Schechter
+          p2: Sam Rappaport
+          w: 2
+        - p1: Casey Ganfry
+          p2: Dan Lee
+          w: 1
+        - p1: Michihito Kageyama
+          p2: Peter Geissler
+          w: 2
+        - p1: Bzo
+          p2: Selwyn Scarborough
+          w: 2
+        - p1: Lou Carlascio
+          p2: Makoto Nozaki
+          w: 1
+        - p1: Glen Konstantin
+          p2: Monty Haskins
+          w: 2
+        - p1: Louis Epstein
+          p2: Mirna Abada
+          w: 2
+        - p1: Tim Flateman
+          p2: Kal Karran
+          w: 1
+    - matches:
+        - p1: Peter Geissler
+          p2: Abe Schechter
+          w: 2
+        - p1: Jason Aingorn
+          p2: Phil Siler
+          w: 2
+        - p1: Dan Lee
+          p2: Jeff Schwarz
+          w: 1
+        - p1: Tim Flateman
+          p2: Bzo
+          w: 1
+        - p1: Monty Haskins
+          p2: Makoto Nozaki
+          w: 1
+        - p1: Michihito Kageyama
+          p2: Glen Konstantin
+          w: 1
+        - p1: Howard Linnemann-Schmidt
+          p2: Eddie Rodriguez
+          w: 1
+        - p1: Sam Rappaport
+          p2: Selwyn Scarborough
+          w: 2
+        - p1: Casey Ganfry
+          p2: Lou Carlascio
+          w: 2
+        - p1: Mirna Abada
+          p2: Jesse Chrismer
+          w: 2
+        - p1: Noah Allen
+          p2: Louis Epstein
+          w: 2
+        - p1: Kal Karran
+          bye: true
 
-- id: "2026-01-22"
-  date: "2026-01-22"
-  location: "The Alcove, Astoria"
-  matches:
-    # Round 1
-    - p1: Nick Vlamis
-      p2: Marco Diaz
-      winner: Nick Vlamis
-    - p1: Alice Chen
-      p2: Tom Reilly
-      winner: Alice Chen
-    - p1: Sandra Park
-      p2: Yuki Tanaka
-      winner: Sandra Park
-    # Round 2
-    - p1: Nick Vlamis
-      p2: Alice Chen
-      winner: Nick Vlamis
-    - p1: Sandra Park
-      p2: Marco Diaz
-      winner: Sandra Park
-    - p1: Tom Reilly
-      p2: Yuki Tanaka
-      winner: Tom Reilly
-    # Round 3
-    - p1: Nick Vlamis
-      p2: Sandra Park
-      winner: Nick Vlamis
-    - p1: Alice Chen
-      p2: Tom Reilly
-      winner: Alice Chen
-    - p1: Marco Diaz
-      p2: Yuki Tanaka
-      winner: Marco Diaz
+- name: "February 2026"
+  date: "2026-02-19"
+  location: "Le Cheile"
+  rounds:
+    - matches:
+        - p1: Art Benjamin
+          p2: Makoto Nozaki
+          w: 2
+        - p1: Charlie Eisenhood
+          p2: Onur Ihtiyar
+          w: 1
+        - p1: Tim Flateman
+          p2: Jordan Cohn
+          w: 1
+        - p1: Phil Siler
+          p2: Monty Haskins
+          w: 1
+        - p1: Phil Simborg
+          p2: Bzo
+          w: 2
+        - p1: Howard Linnemann-Schmidt
+          p2: Selwyn Scarborough
+          w: 1
+        - p1: Jesse Chrismer
+          p2: Louis Epstein
+          w: 2
+        - p1: Sam Rappaport
+          p2: Jason Aingorn
+          w: 1
+        - p1: Mirna Abada
+          p2: Nygel
+          w: 2
+        - p1: Noah Allen
+          p2: Lou Carlascio
+          w: 2
+        - p1: Eddie Rodriguez
+          bye: true
+    - matches:
+        - p1: Sam Rappaport
+          p2: Makoto Nozaki
+          w: 1
+        - p1: Tim Flateman
+          p2: Louis Epstein
+          w: 1
+        - p1: Selwyn Scarborough
+          p2: Jesse Chrismer
+          w: 2
+        - p1: Art Benjamin
+          p2: Eddie Rodriguez
+          w: 2
+        - p1: Charlie Eisenhood
+          p2: Bzo
+          w: 2
+        - p1: Phil Siler
+          p2: Lou Carlascio
+          w: 2
+        - p1: Onur Ihtiyar
+          p2: Mirna Abada
+          w: 1
+        - p1: Howard Linnemann-Schmidt
+          p2: Nygel
+          w: 1
+        - p1: Jordan Cohn
+          p2: Noah Allen
+          w: 1
+        - p1: Jason Aingorn
+          p2: Phil Simborg
+          w: 2
+        - p1: Monty Haskins
+          bye: true
+    - matches:
+        - p1: Sam Rappaport
+          p2: Tim Flateman
+          w: 2
+        - p1: Jason Aingorn
+          p2: Mirna Abada
+          w: 1
+        - p1: Charlie Eisenhood
+          p2: Makoto Nozaki
+          w: 2
+        - p1: Jesse Chrismer
+          p2: Phil Siler
+          w: 1
+        - p1: Howard Linnemann-Schmidt
+          p2: Bzo
+          w: 2
+        - p1: Noah Allen
+          p2: Art Benjamin
+          w: 2
+        - p1: Louis Epstein
+          p2: Onur Ihtiyar
+          w: 1
+        - p1: Lou Carlascio
+          p2: Eddie Rodriguez
+          w: 2
+        - p1: Monty Haskins
+          p2: Jordan Cohn
+          w: 1
+        - p1: Phil Simborg
+          p2: Selwyn Scarborough
+          w: 1
+        - p1: Nygel
+          bye: true
+
+- name: "March 2026"
+  date: "2026-03-19"
+  location: "Le Cheile"
+  rounds:
+    - matches:
+        - p1: Makoto Nozaki
+          p2: Tim Flateman
+          w: 1
+        - p1: Nick Vlamis
+          p2: Jesse Chrismer
+          w: 2
+        - p1: Lou Carlascio
+          p2: Nygel
+          w: 1
+        - p1: Abe Schechter
+          p2: Louis Epstein
+          w: 2
+        - p1: Bzo
+          p2: Nick Kravitz
+          w: 2
+        - p1: Glen Konstantin
+          p2: Monty Haskins
+          w: 2
+        - p1: Selwyn Scarborough
+          p2: Ruddy Santana
+          w: 1
+        - p1: Matthew Schneid
+          p2: Charlie Eisenhood
+          w: 2
+        - p1: Noah Allen
+          p2: Jeff Schwarz
+          w: 2
+        - p1: Eddie Rodriguez
+          p2: Peter Geissler
+          w: 2
+        - p1: Mirna Abada
+          p2: Jason Aingorn
+          w: 2
+        - p1: Eli Rosenblith
+          p2: Donny Lomuto
+          w: 1
+        - p1: Jordan Cohn
+          bye: true
+    - matches:
+        - p1: Makoto Nozaki
+          p2: Nick Kravitz
+          w: 2
+        - p1: Lou Carlascio
+          p2: Monty Haskins
+          w: 2
+        - p1: Selwyn Scarborough
+          p2: Charlie Eisenhood
+          w: 1
+        - p1: Eli Rosenblith
+          p2: Jeff Schwarz
+          w: 2
+        - p1: Jesse Chrismer
+          p2: Peter Geissler
+          w: 1
+        - p1: Louis Epstein
+          p2: Jason Aingorn
+          w: 1
+        - p1: Ruddy Santana
+          p2: Noah Allen
+          w: 1
+        - p1: Nygel
+          p2: Matthew Schneid
+          w: 1
+        - p1: Mirna Abada
+          p2: Bzo
+          w: 1
+        - p1: Eddie Rodriguez
+          p2: Abe Schechter
+          w: 1
+        - p1: Tim Flateman
+          p2: Glen Konstantin
+          w: 1
+        - p1: Nick Vlamis
+          p2: Jordan Cohn
+          w: 1
+        - p1: Donny Lomuto
+          bye: true
+    - matches:
+        - p1: Selwyn Scarborough
+          p2: Nick Kravitz
+          w: 1
+        - p1: Jesse Chrismer
+          p2: Monty Haskins
+          w: 1
+        - p1: Louis Epstein
+          p2: Jeff Schwarz
+          w: 2
+        - p1: Bzo
+          bye: true
+        - p1: Glen Konstantin
+          p2: Abe Schechter
+          w: 1
+        - p1: Jordan Cohn
+          p2: Donny Lomuto
+          w: 1
+        - p1: Makoto Nozaki
+          p2: Mirna Abada
+          w: 2
+        - p1: Lou Carlascio
+          p2: Eli Rosenblith
+          w: 1
+        - p1: Jason Aingorn
+          p2: Nygel
+          w: 1
+        - p1: Nick Vlamis
+          p2: Ruddy Santana
+          w: 1
+        - p1: Peter Geissler
+          p2: Tim Flateman
+          w: 2
+        - p1: Eddie Rodriguez
+          p2: Charlie Eisenhood
+          w: 1
+
+- name: "April 2026"
+  date: "2026-04-23"
+  location: "Le Cheile"
+  rounds:
+    - matches:
+        - p1: Jordan Cohn
+          p2: Tim Flateman
+          w: 1
+        - p1: Louis Epstein
+          p2: Jason Aingorn
+          w: 2
+        - p1: Noah Allen
+          p2: Selwyn Scarborough
+          w: 2
+        - p1: Onur Ihtiyar
+          p2: Eddie Rodriguez
+          w: 2
+        - p1: Sam Rappaport
+          p2: Nick Vlamis
+          w: 2
+        - p1: Ruddy Santana
+          p2: Donny Lomuto
+          w: 2
+        - p1: Makoto Nozaki
+          p2: Jesse Chrismer
+          w: 1
+        - p1: Casey Ganfry
+          p2: Howard Linnemann-Schmidt
+          w: 2
+        - p1: Lou Carlascio
+          p2: Alex Adams
+          w: 2
+        - p1: Monty Haskins
+          p2: Dan Lee
+          w: 1
+    - matches:
+        - p1: Jordan Cohn
+          p2: Eddie Rodriguez
+          w: 1
+        - p1: Makoto Nozaki
+          p2: Nick Vlamis
+          w: 2
+        - p1: Selwyn Scarborough
+          p2: Alex Adams
+          w: 2
+        - p1: Jason Aingorn
+          p2: Howard Linnemann-Schmidt
+          w: 2
+        - p1: Noah Allen
+          p2: Lou Carlascio
+          w: 2
+        - p1: Onur Ihtiyar
+          p2: Tim Flateman
+          w: 1
+        - p1: Monty Haskins
+          p2: Donny Lomuto
+          w: 1
+        - p1: Louis Epstein
+          p2: Casey Ganfry
+          w: 1
+        - p1: Sam Rappaport
+          p2: Jesse Chrismer
+          w: 2
+        - p1: Ruddy Santana
+          p2: Dan Lee
+          w: 2
+    - matches:
+        - p1: Jordan Cohn
+          p2: Nick Vlamis
+          w: 2
+        - p1: Monty Haskins
+          p2: Howard Linnemann-Schmidt
+          w: 1
+        - p1: Tim Flateman
+          p2: Ruddy Santana
+          w: 1
+        - p1: Casey Ganfry
+          p2: Sam Rappaport
+          w: 2
+        - p1: Alex Adams
+          p2: Makoto Nozaki
+          w: 1
+        - p1: Noah Allen
+          p2: Dan Lee
+          w: 1
+        - p1: Jason Aingorn
+          p2: Donny Lomuto
+          w: 2
+        - p1: Eddie Rodriguez
+          p2: Jesse Chrismer
+          w: 1
+        - p1: Louis Epstein
+          p2: Selwyn Scarborough
+          w: 1
+        - p1: Onur Ihtiyar
+          p2: Lou Carlascio
+          w: 1
+
+- name: "May 2026"
+  date: "2026-05-14"
+  location: "Le Cheile"
+  rounds:
+    - matches:
+        - p1: Nick Vlamis
+          p2: Ruddy Santana
+          w: 1
+        - p1: Onur Ihtiyar
+          p2: Donny Lomuto
+          w: 1
+        - p1: Jesse Chrismer
+          p2: Noah Allen
+          w: 2
+        - p1: Alex Adams
+          p2: Louis Epstein
+          w: 2
+        - p1: Mirna Abada
+          p2: Howard Linnemann-Schmidt
+          w: 2
+        - p1: Casey Ganfry
+          p2: Eddie Rodriguez
+          w: 2
+        - p1: Tim Flateman
+          p2: Makoto Nozaki
+          w: 2
+        - p1: Jason Aingorn
+          bye: true
+    - matches:
+        - p1: Jason Aingorn
+          p2: Onur Ihtiyar
+          w: 2
+        - p1: Makoto Nozaki
+          p2: Howard Linnemann-Schmidt
+          w: 1
+        - p1: Noah Allen
+          p2: Eddie Rodriguez
+          w: 2
+        - p1: Louis Epstein
+          p2: Nick Vlamis
+          w: 2
+        - p1: Tim Flateman
+          p2: Mirna Abada
+          w: 2
+        - p1: Casey Ganfry
+          p2: Alex Adams
+          w: 1
+        - p1: Ruddy Santana
+          p2: Jesse Chrismer
+          w: 2
+        - p1: Donny Lomuto
+          bye: true
+    - matches:
+        - p1: Eddie Rodriguez
+          p2: Makoto Nozaki
+          w: 2
+        - p1: Nick Vlamis
+          p2: Onur Ihtiyar
+          w: 2
+        - p1: Louis Epstein
+          p2: Casey Ganfry
+          w: 1
+        - p1: Noah Allen
+          p2: Donny Lomuto
+          w: 2
+        - p1: Jason Aingorn
+          p2: Mirna Abada
+          w: 2
+        - p1: Howard Linnemann-Schmidt
+          p2: Jesse Chrismer
+          w: 1
+        - p1: Ruddy Santana
+          p2: Alex Adams
+          w: 2
+        - p1: Tim Flateman
+          bye: true
+
+- name: "June 2026"
+  date: "2026-06-11"
+  location: "Le Cheile"
+
+- name: "July 2026"
+  date: "2026-07-16"
+  location: "Le Cheile"
+
+- name: "August 2026"
+  date: "2026-08-20"
+  location: "Le Cheile"
+
+- name: "September 2026"
+  date: "2026-09-24"
+  location: "Le Cheile"
+
+- name: "October 2026"
+  date: "2026-10-15"
+  location: "Le Cheile"
+
+- name: "November 2026"
+  date: "2026-11-19"
+  location: "Le Cheile"
+
+- name: "December 2026"
+  date: "2026-12-17"
+  location: "Le Cheile"

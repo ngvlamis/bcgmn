@@ -2,4 +2,4 @@
 permalink: members.json
 eleventyExcludeFromCollections: true
 ---
-[{% for member in members %}"{{ member.name }}"{% if not loop.last %},{% endif %}{% endfor %}]
+[{% for member in players.all %}"{{ member.name }}"{% if not loop.last %},{% endif %}{% endfor %}]

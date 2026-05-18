@@ -11,6 +11,18 @@ document.querySelectorAll(".meeting-header").forEach((btn) => {
   });
 });
 
+// Round expand/collapse
+document.querySelectorAll(".round-header").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const section = btn.closest(".round-section");
+    const body = section.querySelector(".round-body");
+    const isOpen = !body.hidden;
+    body.hidden = isOpen;
+    btn.setAttribute("aria-expanded", String(!isOpen));
+    section.classList.toggle("is-open", !isOpen);
+  });
+});
+
 // Standings sort
 const table = document.getElementById("standings-table");
 if (table) {

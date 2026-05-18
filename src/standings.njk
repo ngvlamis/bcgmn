@@ -25,7 +25,7 @@ title: Standings
     <tr class="{{ 'top-three' if loop.index <= 3 }}">
       <td>{{ loop.index }}</td>
       <td><a href="/members/#{{ player.name | slugify }}">{{ player.name }}</a></td>
-      <td>{{ player.points }}</td>
+      <td>{{ player.points | round(1) }}</td>
       <td>{{ player.events }}</td>
       <td>{{ player.wins }}</td>
       <td>{{ player.losses }}</td>

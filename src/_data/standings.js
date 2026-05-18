@@ -16,44 +16,39 @@ module.exports = function () {
   for (const meeting of meetings) {
     if (parseInt(String(meeting.date).slice(0, 4)) !== currentYear) continue;
 
-    const matches = meeting.matches || [];
+    const matches = (meeting.rounds || []).flatMap((r) => r.matches || []);
     const attendees = new Set();
-    const meetingWins = {};   // real wins only (not byes)
+    const meetingWins = {};
     const meetingLosses = {};
+    const meetingByes = {};
 
     for (const match of matches) {
-      const { p1, p2, winner, bye: isBye } = match;
+      const { p1, p2, w, bye: isBye } = match;
 
       if (isBye || !p2) {
-        // Bye: p1 gets 2.5 pts; byes don't count toward the 3-0 record
         if (p1) {
           ensure(p1);
           attendees.add(p1);
           stats[p1].byes++;
           stats[p1].points += 2.5;
+          meetingByes[p1] = (meetingByes[p1] || 0) + 1;
         }
         continue;
       }
 
-      if (!p1 || !p2 || !winner) continue;
+      if (!p1 || !p2 || !w) continue;
       ensure(p1);
       ensure(p2);
       attendees.add(p1);
       attendees.add(p2);
 
-      if (winner === p1) {
-        stats[p1].wins++;
-        stats[p1].points += 5;
-        meetingWins[p1] = (meetingWins[p1] || 0) + 1;
-        meetingLosses[p2] = (meetingLosses[p2] || 0) + 1;
-        stats[p2].losses++;
-      } else if (winner === p2) {
-        stats[p2].wins++;
-        stats[p2].points += 5;
-        meetingWins[p2] = (meetingWins[p2] || 0) + 1;
-        meetingLosses[p1] = (meetingLosses[p1] || 0) + 1;
-        stats[p1].losses++;
-      }
+      const winner = w === 1 ? p1 : p2;
+      const loser  = w === 1 ? p2 : p1;
+      stats[winner].wins++;
+      stats[winner].points += 5;
+      meetingWins[winner]  = (meetingWins[winner]  || 0) + 1;
+      meetingLosses[loser] = (meetingLosses[loser] || 0) + 1;
+      stats[loser].losses++;
     }
 
     // Attendance bonus
@@ -62,9 +57,9 @@ module.exports = function () {
       stats[name].points += 5;
     }
 
-    // 3-0 bonus: split 5 pts among all players with 3 wins and 0 losses at this meeting
+    // 3-0 bonus: split 5 pts among all undefeated players (wins + bye = 3, no losses)
     const perfect = [...attendees].filter(
-      (name) => (meetingWins[name] || 0) === 3 && !(meetingLosses[name])
+      (name) => (meetingWins[name] || 0) + (meetingByes[name] || 0) >= 3 && !(meetingLosses[name])
     );
     if (perfect.length > 0) {
       const share = 5 / perfect.length;

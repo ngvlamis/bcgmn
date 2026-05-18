@@ -125,6 +125,10 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.page-header--section {
+  margin-top: 3rem;
+}
+
 .page-header h1 {
   font-size: 1.4rem;
   font-weight: 700;
@@ -260,11 +264,12 @@ body {
 
 .meeting-header {
   all: unset;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 13px 16px;
+  padding: 13px 20px;
   cursor: pointer;
   user-select: none;
 }
@@ -323,7 +328,7 @@ body {
 }
 
 .match-table th {
-  padding: 7px 16px;
+  padding: 7px 20px 7px 32px;
   text-align: left;
   font-size: 0.72rem;
   font-weight: 600;
@@ -334,7 +339,7 @@ body {
 }
 
 .match-table td {
-  padding: 9px 16px;
+  padding: 9px 20px 9px 32px;
   border-top: 1px solid var(--border);
 }
 
@@ -345,6 +350,76 @@ body {
 .match-table td.match-winner-col {
   color: var(--red);
   font-weight: 600;
+}
+
+/* ── Tally table ── */
+
+.tally-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.tally-table th {
+  padding: 7px 20px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  background: #faf9f6;
+}
+
+.tally-table td {
+  padding: 9px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.tally-record {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.tally-bye {
+  font-size: 0.78rem;
+}
+
+/* ── Round sub-accordion ── */
+
+.round-section {
+  border-top: 1px solid var(--border);
+}
+
+.round-header {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 20px 9px 32px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  background: #f5f3f0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.round-header:hover {
+  background: #ede9e4;
+}
+
+.round-chevron {
+  transition: transform 0.15s;
+  font-size: 0.8rem;
+}
+
+.round-section.is-open .round-chevron {
+  transform: rotate(180deg);
 }
 
 /* ── Standings table ── */

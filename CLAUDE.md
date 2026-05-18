@@ -63,7 +63,7 @@ Computed in `standings.js` per calendar year:
 | Bye | 2.5 |
 | Going 3-0 at a meeting | 5 split equally among all 3-0 finishers |
 
-"Attending" means appearing in at least one match (p1 or p2) at the meeting. Byes don't count toward the 3-0 record — only real match wins do. Primary sort is by total points; wins break ties.
+"Attending" means appearing in at least one match (p1 or p2) at the meeting. A player is "3-0" if they have no losses and their wins + byes total 3 (so 2 wins + 1 bye counts as undefeated). Primary sort is by total points; wins break ties.
 
 ### Adding data
 
