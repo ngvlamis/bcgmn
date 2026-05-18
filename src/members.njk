@@ -32,6 +32,9 @@ title: Players
         {% if member.bmab %}<a class="member-bmab" href="{{ member.bmab }}" target="_blank" rel="noopener">BMAB ↗</a>{% endif %}
       </div>
       {% endif %}
+      {% if member.og %}
+      <div class="member-og"><span class="member-og-label">opengammon</span><span class="member-og-handle">{{ member.og }}</span></div>
+      {% endif %}
       {% if member.rating %}
       <div class="member-rating">Rating: {{ member.rating }}</div>
       {% endif %}
@@ -71,6 +74,9 @@ title: Players
         {% if guest.bmab_title and guest.bmab %} | {% endif %}
         {% if guest.bmab %}<a class="member-bmab" href="{{ guest.bmab }}" target="_blank" rel="noopener">BMAB ↗</a>{% endif %}
       </div>
+      {% endif %}
+      {% if guest.og %}
+      <div class="member-og"><span class="member-og-label">opengammon</span><span class="member-og-handle">{{ guest.og }}</span></div>
       {% endif %}
       {% if guest.rating %}
       <div class="member-rating">Rating: {{ guest.rating }}</div>

@@ -1,6 +1,7 @@
 - name: Nick Vlamis
   role: Web Admin
   photo: /assets/img/nick-vlamis.jpg
+  og: nickv
 
 - name: Selwyn Scarborough
   bmab: "https://bgmastersab.com/europe/matchlog?id=5419"
@@ -17,6 +18,7 @@
   bmab: "https://bgmastersab.com/matchlog?id=2684"
   bmab_title: M3
   role: Organizer
+  og: jaingorn
 
 - name: Donny Lomuto
   bmab: "https://bgmastersab.com/matchlog?id=943"
@@ -27,6 +29,7 @@
 
 - name: Alex Adams
   bmab: "https://bgmastersab.com/matchlog?id=5747"
+  og: AlexRobin78
 
 - name: Jeff Schwarz
   bmab: "https://bgmastersab.com/matchlog?id=4883"
@@ -34,3 +37,9 @@
 - name: Art Benjamin
   bmab: "https://bgmastersab.com/matchlog?id=117"
   bmab_title: GM3
+
+- name: Jesse Chrismer
+  og: jchriz
+
+- name: Tim Flateman
+  og: peanut
