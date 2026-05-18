@@ -557,6 +557,23 @@ body {
   margin-bottom: 3px;
 }
 
+.member-role {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.member-bmab-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
 .member-rating {
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -577,9 +594,7 @@ body {
 }
 
 .member-bmab {
-  display: inline-block;
-  margin-top: 6px;
-  font-size: 0.75rem;
+  font-size: inherit;
   color: var(--red);
   text-decoration: none;
 }

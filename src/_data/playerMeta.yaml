@@ -1,4 +1,36 @@
 - name: Nick Vlamis
-  bio: Club founder. Took up backgammon in 2022 and hasn't looked back.
-  rating: 1620
-  joined: "2024-09"
+  role: Webmaster
+  photo: /assets/img/nick-vlamis.jpg
+
+- name: Selwyn Scarborough
+  bmab: "https://bgmastersab.com/europe/matchlog?id=5419"
+
+- name: Michihito Kageyama
+  bmab: "https://bgmastersab.com/matchlog?id=9"
+  bmab_title: GM0
+
+- name: Eddie Rodriguez
+  bmab: "https://bgmastersab.com/matchlog?id=2938"
+  bmab_title: M3
+
+- name: Jason Aingorn
+  bmab: "https://bgmastersab.com/matchlog?id=2684"
+  bmab_title: M3
+  role: President
+
+- name: Donny Lomuto
+  bmab: "https://bgmastersab.com/matchlog?id=943"
+
+- name: Sam Rappaport
+  bmab: "https://bgmastersab.com/matchlog?id=4719"
+  bmab_title: M2
+
+- name: Alex Adams
+  bmab: "https://bgmastersab.com/matchlog?id=5747"
+
+- name: Jeff Schwarz
+  bmab: "https://bgmastersab.com/matchlog?id=4883"
+
+- name: Art Benjamin
+  bmab: "https://bgmastersab.com/matchlog?id=117"
+  bmab_title: GM3

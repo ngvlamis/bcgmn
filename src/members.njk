@@ -1,10 +1,15 @@
 ---
 layout: layouts/base.njk
-title: Members
+title: Players
 ---
 
 <div class="page-header">
-  <h1>Members</h1>
+  <h1>Players</h1>
+</div>
+
+<div class="page-header page-header--section" style="margin-top: 0;">
+  <h2>Regulars</h2>
+  <p class="page-subtitle">Attended two or more events this year</p>
 </div>
 
 <div class="member-grid">
@@ -19,6 +24,14 @@ title: Members
     </div>
     <div class="member-info">
       <h2 class="member-name">{{ member.name }}</h2>
+      {% if member.role %}<div class="member-role">{{ member.role }}</div>{% endif %}
+      {% if member.bmab_title or member.bmab %}
+      <div class="member-bmab-title">
+        {% if member.bmab_title %}{% if 'GM' in member.bmab_title %}Grandmaster{% else %}Master{% endif %}{% endif %}
+        {% if member.bmab_title and member.bmab %} | {% endif %}
+        {% if member.bmab %}<a class="member-bmab" href="{{ member.bmab }}" target="_blank" rel="noopener">BMAB ↗</a>{% endif %}
+      </div>
+      {% endif %}
       {% if member.rating %}
       <div class="member-rating">Rating: {{ member.rating }}</div>
       {% endif %}
@@ -51,6 +64,14 @@ title: Members
     </div>
     <div class="member-info">
       <h2 class="member-name">{{ guest.name }}</h2>
+      {% if guest.role %}<div class="member-role">{{ guest.role }}</div>{% endif %}
+      {% if guest.bmab_title or guest.bmab %}
+      <div class="member-bmab-title">
+        {% if guest.bmab_title %}{% if 'GM' in guest.bmab_title %}Grandmaster{% else %}Master{% endif %}{% endif %}
+        {% if guest.bmab_title and guest.bmab %} | {% endif %}
+        {% if guest.bmab %}<a class="member-bmab" href="{{ guest.bmab }}" target="_blank" rel="noopener">BMAB ↗</a>{% endif %}
+      </div>
+      {% endif %}
       {% if guest.rating %}
       <div class="member-rating">Rating: {{ guest.rating }}</div>
       {% endif %}

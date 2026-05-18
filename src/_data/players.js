@@ -33,24 +33,24 @@ module.exports = function () {
     name,
     events: attendance[name],
     ...Object.fromEntries(
-      ["bio", "rating", "joined", "photo"]
+      ["bio", "rating", "joined", "photo", "bmab", "bmab_title", "role"]
         .filter((k) => metaByName[name]?.[k] != null)
         .map((k) => [k, metaByName[name][k]])
     ),
   });
 
-  const byEventsDesc = (a, b) =>
-    b.events - a.events || a.name.localeCompare(b.name);
+  const lastName = (name) => name.split(" ").at(-1);
+  const byLastName = (a, b) => lastName(a.name).localeCompare(lastName(b.name));
 
   const members = Object.keys(attendance)
     .filter((name) => attendance[name] >= 2)
     .map(makePlayer)
-    .sort(byEventsDesc);
+    .sort(byLastName);
 
   const guests = Object.keys(attendance)
     .filter((name) => attendance[name] === 1)
     .map(makePlayer)
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort(byLastName);
 
   return { members, guests, all: [...members, ...guests] };
 };
