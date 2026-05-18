@@ -1,5 +1,5 @@
 - name: Nick Vlamis
-  role: Webmaster
+  role: Web Admin
   photo: /assets/img/nick-vlamis.jpg
 
 - name: Selwyn Scarborough
@@ -16,7 +16,7 @@
 - name: Jason Aingorn
   bmab: "https://bgmastersab.com/matchlog?id=2684"
   bmab_title: M3
-  role: President
+  role: Organizer
 
 - name: Donny Lomuto
   bmab: "https://bgmastersab.com/matchlog?id=943"
