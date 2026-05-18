@@ -6,6 +6,7 @@
   <title>{% if title %}{{ title }} — {% endif %}{{ site.abbr }}</title>
   <link rel="icon" type="image/png" href="{{ '/assets/img/favicon.png' | url }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
+  {% if extraCss %}<link rel="stylesheet" href="{{ extraCss | url }}">{% endif %}
 </head>
 <body>
   <header class="site-header">
@@ -18,6 +19,7 @@
         <li><a href="{{ '/schedule/' | url }}">Schedule</a></li>
         <li><a href="{{ '/standings/' | url }}">Standings</a></li>
         <li><a href="{{ '/members/' | url }}">Players</a></li>
+        <li><a href="{{ '/bracket/' | url }}">Bracket</a></li>
       </ul>
       <div class="nav-icons">
         <a href="mailto:{{ site.email }}" class="nav-email" aria-label="Email BCGMN">
@@ -45,5 +47,6 @@
     <p>{{ site.title }} &middot; {{ site.year }} &middot; <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a> &middot; <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
   </footer>
   <script src="{{ '/assets/js/main.js' | url }}"></script>
+  {% if extraScript %}<script src="{{ extraScript | url }}"></script>{% endif %}
 </body>
 </html>
