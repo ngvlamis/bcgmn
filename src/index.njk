@@ -9,11 +9,10 @@ layout: layouts/base.njk
 
 <figure class="group-photo">
   <img src="{{ '/assets/img/group_photo.jpg' | url }}" alt="BCGMN members gathered around a backgammon board">
-  <figcaption><!-- photo caption goes here --></figcaption>
 </figure>
 
 <section class="home-about">
-  <p><!-- about text goes here --></p>
+  <p>A competitive backgammon club in Washington Heights, NYC. All levels welcome.</p>
 </section>
 
 <nav class="home-nav">
@@ -31,5 +30,10 @@ layout: layouts/base.njk
     <span class="home-nav-icon">👤</span>
     <span class="home-nav-label">Players</span>
     <span class="home-nav-desc">Club roster and player profiles</span>
+  </a>
+  <a href="{{ '/about/' | url }}" class="home-nav-card">
+    <span class="home-nav-icon">ℹ️</span>
+    <span class="home-nav-label">About</span>
+    <span class="home-nav-desc">Who we are, house rules, and how to join</span>
   </a>
 </nav>
