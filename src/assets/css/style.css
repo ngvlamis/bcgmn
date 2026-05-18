@@ -530,6 +530,77 @@ body {
   text-decoration: underline;
 }
 
+/* ── About page ── */
+
+.about-body {
+  max-width: 620px;
+}
+
+.about-section {
+  margin-bottom: 2.5rem;
+}
+
+.about-section h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+
+.about-section p {
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+}
+
+.about-times {
+  color: var(--text-muted);
+  font-size: 0.9rem !important;
+}
+
+.about-times span {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.about-rules {
+  margin: 0.5rem 0 0 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.about-points-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.about-points-table th {
+  background: var(--red);
+  color: white;
+  padding: 9px 16px;
+  text-align: left;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.about-points-table td {
+  padding: 9px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.about-points-table tr:nth-child(even) td {
+  background: #faf9f6;
+}
+
 /* ── Member grid ── */
 
 .member-grid {
