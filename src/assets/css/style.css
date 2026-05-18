@@ -44,8 +44,9 @@ body {
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   height: 96px;
+  flex-wrap: wrap;
 }
 
 .nav-brand {
@@ -63,6 +64,7 @@ body {
 .nav-links {
   list-style: none;
   display: flex;
+  margin-left: auto;
 }
 
 .nav-links a {
@@ -81,15 +83,41 @@ body {
   color: var(--red);
 }
 
-.nav-instagram {
+.nav-icons {
   display: flex;
   align-items: center;
-  padding: 0 0.75rem !important;
-  color: var(--text-muted) !important;
 }
 
-.nav-instagram:hover {
-  color: var(--red) !important;
+.nav-instagram,
+.nav-email {
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  height: 96px;
+  color: var(--text-muted);
+  transition: color 0.1s;
+}
+
+.nav-instagram:hover,
+.nav-email:hover {
+  color: var(--red);
+}
+
+.nav-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  height: 96px;
+  color: var(--text-muted);
+  transition: color 0.1s;
+}
+
+.nav-hamburger:hover {
+  color: var(--red);
 }
 
 /* ── Layout ── */
@@ -548,13 +576,69 @@ body {
   color: var(--text-muted);
 }
 
+.member-bmab {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--red);
+  text-decoration: none;
+}
+
+.member-bmab:hover {
+  text-decoration: underline;
+}
+
 /* ── Responsive ── */
 
-@media (max-width: 540px) {
-  .nav-logo { height: 60px; }
-  .nav { height: 74px; }
-  .nav-links a { height: 74px; }
-  .nav-links a { padding: 0 0.6rem; }
+@media (max-width: 600px) {
+  .nav {
+    height: auto;
+    padding: 0 1rem;
+    align-items: stretch;
+  }
+
+  .nav-brand {
+    height: 70px;
+    align-items: center;
+  }
+
+  .nav-logo { height: 58px; }
+
+  .nav-icons {
+    margin-left: auto;
+    height: 70px;
+  }
+
+  .nav-hamburger {
+    display: flex;
+    height: 70px;
+    padding: 0 0.25rem 0 0.5rem;
+  }
+
+  .nav-instagram,
+  .nav-email {
+    height: 70px;
+    padding: 0 0.6rem;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    flex-basis: 100%;
+    margin-left: 0;
+    border-top: 1px solid var(--border);
+    padding: 0.5rem 0;
+  }
+
+  .nav.is-open .nav-links {
+    display: flex;
+  }
+
+  .nav-links a {
+    height: auto;
+    padding: 0.75rem 1rem;
+  }
+
   .main { padding: 1.25rem 1rem; }
   .member-grid { grid-template-columns: 1fr; }
 }

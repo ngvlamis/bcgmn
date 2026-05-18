@@ -1,3 +1,28 @@
+// Hamburger nav
+const hamburger = document.querySelector(".nav-hamburger");
+if (hamburger) {
+  const nav = hamburger.closest(".nav");
+
+  hamburger.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    hamburger.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  nav.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("is-open");
+      hamburger.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!nav.contains(e.target)) {
+      nav.classList.remove("is-open");
+      hamburger.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
 // Meeting expand/collapse
 document.querySelectorAll(".meeting-header").forEach((btn) => {
   btn.addEventListener("click", () => {
