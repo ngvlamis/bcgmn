@@ -5,6 +5,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addDataExtension("yml", (contents) => yaml.load(contents));
 
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("src/CNAME");
 
   eleventyConfig.addFilter("dateFormat", (dateStr) => {
     const [y, m, d] = String(dateStr).split("-").map(Number);

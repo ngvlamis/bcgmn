@@ -8,7 +8,7 @@ layout: layouts/base.njk
 </section>
 
 <figure class="group-photo">
-  <img src="/assets/img/group_photo.jpg" alt="BCGMN members gathered around a backgammon board">
+  <img src="{{ '/assets/img/group_photo.jpg' | url }}" alt="BCGMN members gathered around a backgammon board">
   <figcaption><!-- photo caption goes here --></figcaption>
 </figure>
 
@@ -17,17 +17,17 @@ layout: layouts/base.njk
 </section>
 
 <nav class="home-nav">
-  <a href="/schedule/" class="home-nav-card">
+  <a href="{{ '/schedule/' | url }}" class="home-nav-card">
     <span class="home-nav-icon">📅</span>
     <span class="home-nav-label">Schedule</span>
     <span class="home-nav-desc">Meeting dates and match results</span>
   </a>
-  <a href="/standings/" class="home-nav-card">
+  <a href="{{ '/standings/' | url }}" class="home-nav-card">
     <span class="home-nav-icon">🏆</span>
     <span class="home-nav-label">Standings</span>
     <span class="home-nav-desc">{{ site.year }} point totals and rankings</span>
   </a>
-  <a href="/members/" class="home-nav-card">
+  <a href="{{ '/members/' | url }}" class="home-nav-card">
     <span class="home-nav-icon">👤</span>
     <span class="home-nav-label">Players</span>
     <span class="home-nav-desc">Club roster and player profiles</span>

@@ -4,19 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title %}{{ title }} — {% endif %}{{ site.abbr }}</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" type="image/png" href="{{ '/assets/img/favicon.png' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav">
-      <a href="/" class="nav-brand" aria-label="{{ site.title }}">
-        <img src="/assets/img/logo.jpg" alt="BCGMN logo" class="nav-logo">
+      <a href="{{ '/' | url }}" class="nav-brand" aria-label="{{ site.title }}">
+        <img src="{{ '/assets/img/logo.jpg' | url }}" alt="BCGMN logo" class="nav-logo">
       </a>
       <ul class="nav-links" id="nav-menu">
-        <li><a href="/">Home</a></li>
-        <li><a href="/schedule/">Schedule</a></li>
-        <li><a href="/standings/">Standings</a></li>
-        <li><a href="/members/">Players</a></li>
+        <li><a href="{{ '/' | url }}">Home</a></li>
+        <li><a href="{{ '/schedule/' | url }}">Schedule</a></li>
+        <li><a href="{{ '/standings/' | url }}">Standings</a></li>
+        <li><a href="{{ '/members/' | url }}">Players</a></li>
       </ul>
       <div class="nav-icons">
         <a href="mailto:{{ site.email }}" class="nav-email" aria-label="Email BCGMN">
@@ -43,6 +44,6 @@
   <footer class="footer">
     <p>{{ site.title }} &middot; {{ site.year }} &middot; <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a> &middot; <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
   </footer>
-  <script src="/assets/js/main.js"></script>
+  <script src="{{ '/assets/js/main.js' | url }}"></script>
 </body>
 </html>
