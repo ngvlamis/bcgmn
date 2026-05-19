@@ -1,30 +1,4 @@
 // ─────────────────────────────────────────────────────────────
-//  Theme
-// ─────────────────────────────────────────────────────────────
-const THEME_KEY = 'bgSwiss_theme';
-let themeMode = localStorage.getItem(THEME_KEY) || 'system';
-
-const THEME_TOGGLE_HTML = `
-  <div class="theme-toggle" role="group" aria-label="Color theme">
-    <button class="theme-btn" data-mode="light"  title="Light mode"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
-    <button class="theme-btn" data-mode="system" title="System default"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></button>
-    <button class="theme-btn" data-mode="dark"   title="Dark mode"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
-  </div>`;
-
-function applyTheme() {
-  const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const dark = themeMode === 'dark' || (themeMode === 'system' && sysDark);
-  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  document.querySelectorAll('.theme-btn').forEach(btn =>
-    btn.classList.toggle('active', btn.dataset.mode === themeMode)
-  );
-}
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-  if (themeMode === 'system') applyTheme();
-});
-applyTheme();
-
-// ─────────────────────────────────────────────────────────────
 //  State
 // ─────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'bgTrio_v2';
@@ -657,10 +631,7 @@ function renderSetup() {
 
   return `
     <div class="setup-screen">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem">
-        <div class="screen-title">3-Round Swiss Tournament</div>
-        ${THEME_TOGGLE_HTML}
-      </div>
+      <div class="screen-title" style="margin-bottom:0.25rem">3-Round Swiss Tournament</div>
       <div class="screen-subtitle">
         Enter player names in any order — seeding is randomized automatically. All three rounds are generated upfront, so you can record results at your own pace without waiting for a round to finish.
       </div>
@@ -693,10 +664,7 @@ function renderTournament() {
     <div class="tournament-screen">
       <div class="t-header">
         <div class="t-title">${esc(state.tournamentTitle) || '3-Round Swiss Tournament'}</div>
-        <div style="display:flex;gap:0.5rem;align-items:center">
-          ${THEME_TOGGLE_HTML}
-          <button class="reset-btn" id="resetBtn">Reset</button>
-        </div>
+        <button class="reset-btn" id="resetBtn">Reset</button>
       </div>
       <div class="rounds">
         ${state.rounds.map((rnd, i) => `
@@ -809,14 +777,6 @@ function attachEvents() {
   document.getElementById('exportTxt')?.addEventListener('click', () => exportTxt(standings));
   document.getElementById('exportCsv')?.addEventListener('click', () => exportCsv(standings));
 
-  document.querySelectorAll('.theme-btn').forEach(btn =>
-    btn.addEventListener('click', () => {
-      themeMode = btn.dataset.mode;
-      localStorage.setItem(THEME_KEY, themeMode);
-      applyTheme();
-    })
-  );
-  applyTheme();
 }
 
 render();

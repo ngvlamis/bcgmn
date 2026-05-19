@@ -1,3 +1,22 @@
+// Theme toggle — cycles: auto → light → dark → auto
+const themeToggle = document.querySelector(".theme-toggle");
+if (themeToggle) {
+  const labels = { auto: "Theme: system", light: "Theme: light", dark: "Theme: dark" };
+  const cycle  = { auto: "light", light: "dark", dark: "auto" };
+
+  themeToggle.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "auto";
+    const next = cycle[current] || "auto";
+    document.documentElement.setAttribute("data-theme", next);
+    themeToggle.setAttribute("aria-label", labels[next]);
+    if (next === "auto") {
+      localStorage.removeItem("theme");
+    } else {
+      localStorage.setItem("theme", next);
+    }
+  });
+}
+
 // Hamburger nav
 const hamburger = document.querySelector(".nav-hamburger");
 if (hamburger) {
