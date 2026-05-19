@@ -758,10 +758,31 @@ a {
   font-weight: 700;
 }
 
+.member-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
 .member-name {
   font-size: 0.95rem;
   font-weight: 700;
-  margin-bottom: 3px;
+  margin-bottom: 0;
+}
+
+.member-email {
+  color: var(--text-muted);
+  opacity: 0.55;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.member-email:hover {
+  opacity: 1;
+  color: var(--red);
 }
 
 .member-role {
