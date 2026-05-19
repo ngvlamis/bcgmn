@@ -23,10 +23,7 @@ title: Players
       {% endif %}
     </div>
     <div class="member-info">
-      <div class="member-name-row">
-        <h2 class="member-name">{{ member.name }}</h2>
-        {% if member.email %}<a class="member-email" href="mailto:{{ member.email }}" title="{{ member.email }}"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>{% endif %}
-      </div>
+      <h2 class="member-name">{{ member.name }}{% if member.email %} <a class="member-email" href="mailto:{{ member.email }}" title="{{ member.email }}"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>{% endif %}</h2>
       {% if member.role %}<div class="member-role">{{ member.role }}</div>{% endif %}
       {% if member.bmab_title or member.bmab %}
       <div class="member-bmab-title">
@@ -69,10 +66,7 @@ title: Players
       {% endif %}
     </div>
     <div class="member-info">
-      <div class="member-name-row">
-        <h2 class="member-name">{{ guest.name }}</h2>
-        {% if guest.email %}<a class="member-email" href="mailto:{{ guest.email }}" title="{{ guest.email }}"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>{% endif %}
-      </div>
+      <h2 class="member-name">{{ guest.name }}{% if guest.email %} <a class="member-email" href="mailto:{{ guest.email }}" title="{{ guest.email }}"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>{% endif %}</h2>
       {% if guest.role %}<div class="member-role">{{ guest.role }}</div>{% endif %}
       {% if guest.bmab_title or guest.bmab %}
       <div class="member-bmab-title">
