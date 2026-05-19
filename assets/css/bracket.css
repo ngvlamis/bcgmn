@@ -1,81 +1,96 @@
 /* ── Tokens ── */
 :root {
-  --bg:               #f5f3ee;
-  --surface:          #ffffff;
-  --surface-alt:      #f9f7f3;
+  /* derived from style.css — update automatically in dark mode */
+  --text-primary:     var(--text);
+  --accent:           var(--red);
+  --accent-hover:     var(--red-dark);
+  --green:            var(--red);
+  --line:             var(--border);
+  --loser-border:     var(--border);
+
+  /* bracket-specific */
   --surface-info:     #faf8f4;
-  --border:           #e0dbd0;
-  --text-primary:     #1a1a1a;
   --text-heading:     #2d2d2d;
   --text-secondary:   #6b6560;
   --text-muted:       #9b9188;
-  --accent:           #c0272d;
-  --accent-hover:     #a0201f;
   --accent-ring:      rgba(192,39,45,.12);
   --accent-soft:      #d97777;
   --accent-light:     #fdf2f2;
   --accent-light-txt: #a0201f;
-  --green:            #c0272d;
   --green-border:     #e8c5c5;
   --green-bg:         #fdf5f5;
   --green-win-bg:     #fdf2f2;
   --green-win-txt:    #a0201f;
   --blue:             #3b82f6;
   --orange:           #f59e0b;
-  --red:              #c0272d;
   --red-bg:           #fdf2f2;
   --red-txt:          #a0201f;
-  --loser-border:     #e0dbd0;
   --loser-bg:         #f5f3ee;
   --loser-txt:        #9b9188;
   --remove-bg:        #ede9e3;
-  --line:             #e0dbd0;
   --standings-line:   #f0ede8;
   --rec-hi-bg:        #d1fae5; --rec-hi-txt:  #065f46;
   --rec-mid-bg:       #dbeafe; --rec-mid-txt: #1e40af;
   --rec-lo-bg:        #fef3c7; --rec-lo-txt:  #92400e;
   --rec-min-bg:       #fdf2f2; --rec-min-txt: #991b1b;
-  --toggle-bg:        #e8e4dd;
-  --toggle-icon:      #6b6560;
 }
+
 [data-theme="dark"] {
-  --bg:               #1c1614;
-  --surface:          #261d1b;
-  --surface-alt:      #201816;
-  --surface-info:     #2a211f;
-  --border:           #4a3530;
-  --text-primary:     #ede8e5;
-  --text-heading:     #d4cac7;
-  --text-secondary:   #a09088;
-  --text-muted:       #7a6860;
-  --accent:           #e05a5a;
-  --accent-hover:     #f07272;
-  --accent-ring:      rgba(224,90,90,.2);
+  --surface-info:     #242220;
+  --text-heading:     #d4cfc9;
+  --text-secondary:   #9a9088;
+  --text-muted:       #7a706a;
+  --accent-ring:      rgba(217,60,65,.2);
   --accent-soft:      #a0201f;
-  --accent-light:     #3a1515;
-  --accent-light-txt: #f09090;
-  --green:            #e05a5a;
-  --green-border:     #5a2020;
-  --green-bg:         #2e1a1a;
-  --green-win-bg:     #3a1515;
-  --green-win-txt:    #f09090;
+  --accent-light:     #2e1515;
+  --accent-light-txt: #e07070;
+  --green-border:     #4a2020;
+  --green-bg:         #2a1818;
+  --green-win-bg:     #2e1515;
+  --green-win-txt:    #e07070;
   --blue:             #60a5fa;
   --orange:           #fbbf24;
   --red:              #f87171;
-  --red-bg:           #3a1515;
+  --red-bg:           #2e1515;
   --red-txt:          #f87171;
-  --loser-border:     #4a3530;
-  --loser-bg:         #2a211f;
-  --loser-txt:        #7a6860;
-  --remove-bg:        #2a211f;
-  --line:             #3a2a28;
-  --standings-line:   #2e2020;
+  --loser-bg:         #252320;
+  --loser-txt:        #7a706a;
+  --remove-bg:        #2e2b28;
+  --standings-line:   #2a2725;
   --rec-hi-bg:        #064e3b; --rec-hi-txt:  #6ee7b7;
   --rec-mid-bg:       #1e3a5f; --rec-mid-txt: #93c5fd;
   --rec-lo-bg:        #451a03; --rec-lo-txt:  #fcd34d;
-  --rec-min-bg:       #3a1515; --rec-min-txt: #fca5a5;
-  --toggle-bg:        #4a3530;
-  --toggle-icon:      #d4cac7;
+  --rec-min-bg:       #2e1515; --rec-min-txt: #fca5a5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-info:     #242220;
+    --text-heading:     #d4cfc9;
+    --text-secondary:   #9a9088;
+    --text-muted:       #7a706a;
+    --accent-ring:      rgba(217,60,65,.2);
+    --accent-soft:      #a0201f;
+    --accent-light:     #2e1515;
+    --accent-light-txt: #e07070;
+    --green-border:     #4a2020;
+    --green-bg:         #2a1818;
+    --green-win-bg:     #2e1515;
+    --green-win-txt:    #e07070;
+    --blue:             #60a5fa;
+    --orange:           #fbbf24;
+    --red:              #f87171;
+    --red-bg:           #2e1515;
+    --red-txt:          #f87171;
+    --loser-bg:         #252320;
+    --loser-txt:        #7a706a;
+    --remove-bg:        #2e2b28;
+    --standings-line:   #2a2725;
+    --rec-hi-bg:        #064e3b; --rec-hi-txt:  #6ee7b7;
+    --rec-mid-bg:       #1e3a5f; --rec-mid-txt: #93c5fd;
+    --rec-lo-bg:        #451a03; --rec-lo-txt:  #fcd34d;
+    --rec-min-bg:       #2e1515; --rec-min-txt: #fca5a5;
+  }
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -84,24 +99,6 @@ body {
   background: var(--bg); min-height: 100vh; color: var(--text-primary);
   transition: background 0.2s, color 0.2s;
 }
-
-/* ── Theme toggle ── */
-.theme-toggle {
-  display: flex; gap: 0.15rem; flex-shrink: 0;
-  background: var(--surface-alt); border: 1.5px solid var(--border);
-  border-radius: 999px; padding: 0.2rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,.1);
-  transition: background 0.2s, border-color 0.2s;
-}
-.theme-btn {
-  width: 1.9rem; height: 1.9rem; border: none; border-radius: 50%;
-  background: transparent; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text-muted); transition: background 0.15s, color 0.15s;
-}
-.theme-btn:hover:not(.active) { background: var(--border); color: var(--text-secondary); }
-.theme-btn.active { background: var(--accent); color: white; }
-.theme-btn svg { width: 0.95rem; height: 0.95rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ── Setup ── */
 .setup-screen { max-width: 460px; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
