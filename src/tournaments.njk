@@ -35,7 +35,7 @@ permalink: /tournaments/
         <div class="meeting-header-right">
           <span class="meeting-match-count">
             {%- if meeting.rounds -%}
-              {{ meeting.rounds | length }} rounds &middot; {{ meeting.rounds | sumMatches }} matches
+              {{ meeting.rounds | meetingTally | length }} players
             {%- else -%}
               No results yet
             {%- endif -%}
@@ -119,7 +119,7 @@ permalink: /tournaments/
         <div class="meeting-header-right">
           <span class="meeting-match-count">
             {%- if meeting.rounds -%}
-              {{ meeting.rounds | length }} rounds &middot; {{ meeting.rounds | sumMatches }} matches
+              {{ meeting.rounds | meetingTally | length }} players
             {%- else -%}
               No results yet
             {%- endif -%}
