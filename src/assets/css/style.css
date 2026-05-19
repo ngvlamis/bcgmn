@@ -549,9 +549,6 @@ body {
 
 /* ── About page ── */
 
-.about-body {
-  max-width: 620px;
-}
 
 .about-section {
   margin-bottom: 2.5rem;
@@ -590,6 +587,9 @@ body {
 
 .about-points-table {
   width: 100%;
+  max-width: 500px;
+  margin-left: 0;
+  margin-right: auto;
   border-collapse: collapse;
   background: var(--surface);
   border-radius: var(--radius);
@@ -737,7 +737,7 @@ body {
 
 /* ── Responsive ── */
 
-@media (max-width: 600px) {
+@media (max-width: 780px) {
   .nav {
     height: auto;
     padding: 0 1rem;
@@ -749,7 +749,7 @@ body {
     align-items: center;
   }
 
-  .nav-logo { height: 58px; }
+  .nav-logo { height: 64px; }
 
   .nav-icons {
     margin-left: auto;
