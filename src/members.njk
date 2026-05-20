@@ -35,6 +35,9 @@ title: Players
       {% if member.og %}
       <div class="member-og"><span class="member-og-label">opengammon</span><span class="member-og-handle">{{ member.og }}</span></div>
       {% endif %}
+      {% if member.merch %}
+      <div class="member-merch"><a href="{{ member.merch }}" target="_blank" rel="noopener">BG Art ↗</a></div>
+      {% endif %}
       {% if member.rating %}
       <div class="member-rating">Rating: {{ member.rating }}</div>
       {% endif %}
@@ -77,6 +80,9 @@ title: Players
       {% endif %}
       {% if guest.og %}
       <div class="member-og"><span class="member-og-label">opengammon</span><span class="member-og-handle">{{ guest.og }}</span></div>
+      {% endif %}
+      {% if guest.merch %}
+      <div class="member-merch"><a href="{{ guest.merch }}" target="_blank" rel="noopener">BG Art ↗</a></div>
       {% endif %}
       {% if guest.rating %}
       <div class="member-rating">Rating: {{ guest.rating }}</div>

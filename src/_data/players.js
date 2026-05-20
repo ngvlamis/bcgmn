@@ -33,7 +33,7 @@ module.exports = function () {
     name,
     events: attendance[name],
     ...Object.fromEntries(
-      ["bio", "rating", "joined", "photo", "bmab", "bmab_title", "role", "og", "email"]
+      ["bio", "rating", "joined", "photo", "bmab", "bmab_title", "role", "og", "email", "merch"]
         .filter((k) => metaByName[name]?.[k] != null)
         .map((k) => [k, metaByName[name][k]])
     ),
