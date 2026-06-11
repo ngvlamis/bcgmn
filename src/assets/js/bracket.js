@@ -573,7 +573,11 @@ function exportTxt(standings) {
     const lines = [`\n${roundNames[ri]}`];
     rnd.forEach(id => {
       const m = state.matches[id];
-      if (!m || m._isBye) return;
+      if (!m) return;
+      if (m._isBye) {
+        lines.push(`  BYE: ${resolveName(m.p1) || '?'}`);
+        return;
+      }
       const num = state.displayNums[id];
       const p1  = resolveName(m.p1) || '?', p2 = resolveName(m.p2) || '?';
       const win = m.winner ? (m.winner === 'p1' ? p1 : p2) : '—';
@@ -599,7 +603,12 @@ function exportCsv(standings) {
   state.rounds.forEach((rnd, ri) => {
     rnd.forEach(id => {
       const m = state.matches[id];
-      if (!m || m._isBye) return;
+      if (!m) return;
+      if (m._isBye) {
+        const player = resolveName(m.p1) || '';
+        rows.push([roundNames[ri], 'BYE', player, '', player]);
+        return;
+      }
       const num = state.displayNums[id];
       const p1  = resolveName(m.p1) || '', p2 = resolveName(m.p2) || '';
       const win = m.winner ? (m.winner === 'p1' ? p1 : p2) : '';
