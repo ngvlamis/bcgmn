@@ -248,97 +248,174 @@ function buildBracket(players) {
     rounds[1].push(id);
   });
 
-  // ── Determine round-3 pairings via graph algorithm ────────────
-  const r2Partner = {};
-  r2PlayerPairs.forEach(([u, v]) => {
-    r2Partner[u] = v;
-    if (v !== null) r2Partner[v] = u;
-  });
-
-  const wwGroup  = roster.filter(p =>  wSet.has(p) &&  wSet.has(r2Partner[p]));
-  const llGroup  = roster.filter(p => !wSet.has(p) && !wSet.has(r2Partner[p]));
-  const midGroup = roster.filter(p => !wwGroup.includes(p) && !llGroup.includes(p));
-
-  // The R3 bye must go to a true 0-2 player — someone who lost both R1 and R2.
-  // Block dummy from pairing with:
-  //   wwGroup        — 2-0 players
-  //   midGroup       — 1-1 cross-edge players
-  //   r2ByeReceiver  — the player who faced ⊥ in R2 (already had an effective
-  //                    bye; giving them R3 bye = double bye)
-  const r2ByeReceivers = dummy
-    ? r2PlayerPairs
-        .filter(([u, v]) => u === dummy || v === dummy)
-        .map(([u, v]) => u === dummy ? v : u)
-        .filter(p => p !== dummy)
-    : [];
-
-  const tempEdges = [];
-  if (dummy) {
-    [...wwGroup, ...midGroup, ...r2ByeReceivers].forEach(p => {
-      if (!gHas(adj, p, dummy)) {
-        gAdd(adj, p, dummy);
-        tempEdges.push(p);
-      }
-    });
-  }
-
-  const r3Ordered = [...wwGroup, ...midGroup, ...llGroup];
-  const { pairs: r3PlayerPairs } = greedyMatch(r3Ordered, adj);
-
-  // Remove temporary edges so they don't affect match-reference encoding
-  tempEdges.forEach(p => {
-    adj.get(p).delete(dummy);
-    adj.get(dummy).delete(p);
-  });
-
-  // ── Round 3: build match slots using R2 match references ──────
-  // Each player's R3 input = their R2 output slot.
-  // r2SlotFor[player] guarantees uniqueness:
-  //   • Players from different R2 matches → different matchIds         ✓
-  //   • Players from the same R2 match   → opposite outcomes (W vs L) ✓
-  // So no two R3 slots are ever identical.
+  // ── Round 3: build slots, classify into score tiers ──────────
+  // Each R3 slot is a position in the bracket tree, not a known player.
+  // A slot has:
+  //   matchId  — the R2 match it draws from (null for dummy)
+  //   outcome  — 'winner' or 'loser' of that R2 match
+  //   players  — the set of players who could fill this slot
+  //   r1Anc    — R1 match IDs of those players (for ancestor check)
+  //   tier     — 'top' (2-0), 'mid' (1-1), or 'bot' (0-2)
   //
-  // Special case for odd N: when dummy pairs with a real player X in R3,
-  // the bye must go to the 0-2 player — i.e. the *loser* of X's R2 match.
-  // We guarantee this by swapping r2SlotFor for X and X's R2 match partner
-  // so that X gets 'loser' and their partner gets 'winner'.
-  // This swap is safe because X's partner is paired separately in R3 and
-  // will use their (now 'winner') slot without conflict.
-  if (dummy) {
-    const byePair = r3PlayerPairs.find(([u, v]) => u === dummy || v === dummy);
-    if (byePair) {
-      const byePlayer = byePair[0] === dummy ? byePair[1] : byePair[0];
-      if (byePlayer && r2SlotFor[byePlayer] === 'winner') {
-        // Swap slots with the R2 partner
-        const r2mate = r2PlayerPairs
-          .find(([u, v]) => u === byePlayer || v === byePlayer)
-          ?.find(p => p !== byePlayer);
-        if (r2mate && r2mate !== dummy) {
-          r2SlotFor[byePlayer] = 'loser';
-          r2SlotFor[r2mate]    = 'winner';
-        }
-      }
+  // Cross-match slots both go to 'mid' (their actual record is ambiguous
+  // until R2 resolves; pessimistic 1-1 keeps top/bot pools pure).
+
+  const r1AncOf = (players) => {
+    const s = new Set();
+    for (const p of players) {
+      if (p !== dummy && playerToR1Id[p] !== undefined) s.add(playerToR1Id[p]);
+    }
+    return s;
+  };
+
+  const r3Slots = [];
+  const isOddNHalf = N / 2 % 2 !== 0;
+  let crossWinnerSlot = null;
+
+  for (let pairIdx = 0; pairIdx < r2PlayerPairs.length; pairIdx++) {
+    const [u, v] = r2PlayerPairs[pairIdx];
+    if (u === dummy || v === dummy || v === null) {
+      const real = u === dummy ? v : u;
+      r3Slots.push({
+        tier: 'mid',
+        matchId: r2IdFor[real],
+        outcome: 'winner',
+        players: new Set([real]),
+        r1Anc: r1AncOf([real]),
+      });
+    } else {
+      const uInW = wSet.has(u), vInW = wSet.has(v);
+      const players = new Set([u, v]);
+      const r1Anc = r1AncOf(players);
+      const r2Id = r2IdFor[u];
+      let winnerTier, loserTier;
+      if (uInW && vInW)        { winnerTier = 'top'; loserTier = 'mid'; }
+      else if (!uInW && !vInW) { winnerTier = 'mid'; loserTier = 'bot'; }
+      else                     { winnerTier = 'mid'; loserTier = 'mid'; }
+      const winnerSlot = { tier: winnerTier, matchId: r2Id, outcome: 'winner', players, r1Anc };
+      const loserSlot  = { tier: loserTier,  matchId: r2Id, outcome: 'loser',  players, r1Anc };
+      r3Slots.push(winnerSlot);
+      r3Slots.push(loserSlot);
+      if (isOddNHalf && pairIdx === 0) crossWinnerSlot = winnerSlot;
     }
   }
 
-  r3PlayerPairs.forEach(([u, v]) => {
-    const id    = mk();
-    const isBye = u === dummy || v === dummy;
+  const dummySlot = dummy
+    ? { tier: 'bot', matchId: null, outcome: null, players: new Set([dummy]), r1Anc: new Set(), isDummy: true }
+    : null;
+  if (dummySlot) r3Slots.push(dummySlot);
 
-    function r3SlotFor(name) {
-      if (name === dummy) return null;
-      return { type: 'matchResult', matchId: r2IdFor[name], outcome: r2SlotFor[name] };
+  // ── Slot-graph adjacency: two slots conflict if they share an
+  //    R2 ancestor (same matchId) or an R1 ancestor (potential rematch
+  //    under some R2 outcome).
+  function slotsCanPair(s1, s2) {
+    if (s1.matchId !== null && s1.matchId === s2.matchId) return false;
+    for (const r1 of s1.r1Anc) if (s2.r1Anc.has(r1)) return false;
+    return true;
+  }
+
+  // ── Slot-graph greedy matching (most-constrained-first). ─────
+  function greedySlotMatch(pool) {
+    const remaining = [...pool];
+    const pairs = [];
+    while (remaining.length >= 2) {
+      let bestIdx = 0, bestCount = Infinity;
+      for (let i = 0; i < remaining.length; i++) {
+        let c = 0;
+        for (let j = 0; j < remaining.length; j++) {
+          if (i !== j && slotsCanPair(remaining[i], remaining[j])) c++;
+        }
+        if (c < bestCount) { bestCount = c; bestIdx = i; }
+      }
+      const v = remaining[bestIdx];
+      if (bestCount === 0) {
+        remaining.splice(bestIdx, 1);
+        remaining.push(v);
+        break;
+      }
+      let partnerIdx = -1, bestPC = Infinity;
+      for (let j = 0; j < remaining.length; j++) {
+        if (j === bestIdx || !slotsCanPair(v, remaining[j])) continue;
+        let pc = 0;
+        for (let k = 0; k < remaining.length; k++) {
+          if (k === bestIdx || k === j) continue;
+          if (slotsCanPair(remaining[j], remaining[k])) pc++;
+        }
+        if (pc < bestPC) { bestPC = pc; partnerIdx = j; }
+      }
+      pairs.push([v, remaining[partnerIdx]]);
+      const [iLo, iHi] = bestIdx < partnerIdx ? [bestIdx, partnerIdx] : [partnerIdx, bestIdx];
+      remaining.splice(iHi, 1);
+      remaining.splice(iLo, 1);
     }
+    return { pairs, leftover: remaining.length === 1 ? remaining[0] : null };
+  }
 
-    if (isBye) {
-      const realName = u === dummy ? v : u;
-      matches[id] = { id, round: 3, group: 'r3', p1: r3SlotFor(realName), p2: null, winner: null, _isBye: true };
+  // ── Tier pairing with spillover ──────────────────────────────
+  // top and bot pools never share R1 ancestors internally, so they
+  // pair freely. mid is constrained; the slot-graph handles it.
+  // Odd top/bot pools spill one slot into mid. Dummy is forced to
+  // pair within bot (so the R3 bye always lands on a 0-2 player).
+  const topPool = r3Slots.filter(s => s.tier === 'top');
+  const midPool = r3Slots.filter(s => s.tier === 'mid');
+  const botPool = r3Slots.filter(s => s.tier === 'bot');
+
+  const { pairs: topPairs, leftover: topLeft } = greedySlotMatch(topPool);
+
+  const botPairs = [];
+  let botLeft = null;
+  if (dummySlot && botPool.length > 1) {
+    // Force dummy to pair with a real bot slot; greedy the rest.
+    const realBot = botPool.filter(s => !s.isDummy);
+    botPairs.push([dummySlot, realBot[0]]);
+    const rest = realBot.slice(1);
+    const r = greedySlotMatch(rest);
+    botPairs.push(...r.pairs);
+    botLeft = r.leftover;
+  } else {
+    const r = greedySlotMatch(botPool);
+    botPairs.push(...r.pairs);
+    botLeft = r.leftover;
+  }
+
+  // 3-0 minimization: when both a top spillover and a cross-winner slot
+  // exist (N ≡ 6 mod 8), pre-pair them. Both are potential real 2-0
+  // players who'd otherwise inflate the 3-0 count by facing structural
+  // 1-1 mid slots; pairing them absorbs both sources at once.
+  const midSlots = [...midPool];
+  const presetMidPairs = [];
+
+  if (topLeft && crossWinnerSlot && slotsCanPair(topLeft, crossWinnerSlot)) {
+    presetMidPairs.push([topLeft, crossWinnerSlot]);
+    const idx = midSlots.indexOf(crossWinnerSlot);
+    if (idx >= 0) midSlots.splice(idx, 1);
+  } else if (topLeft) {
+    midSlots.push(topLeft);
+  }
+  if (botLeft) midSlots.push(botLeft);
+
+  const { pairs: midPairsInner } = greedySlotMatch(midSlots);
+  const midPairs = [...presetMidPairs, ...midPairsInner];
+
+  const r3SlotPairs = [...topPairs, ...midPairs, ...botPairs];
+
+  // ── Round 3: build match objects from slot pairs ─────────────
+  r3SlotPairs.forEach(([s1, s2]) => {
+    const id = mk();
+    const slotToRef = (s) => ({ type: 'matchResult', matchId: s.matchId, outcome: s.outcome });
+
+    if (s1.isDummy || s2.isDummy) {
+      const real = s1.isDummy ? s2 : s1;
+      matches[id] = {
+        id, round: 3, group: 'r3',
+        p1: slotToRef(real), p2: null,
+        winner: null, _isBye: true,
+      };
     } else {
       matches[id] = {
         id, round: 3, group: 'r3',
-        p1: r3SlotFor(u),
-        p2: r3SlotFor(v),
-        winner: null
+        p1: slotToRef(s1), p2: slotToRef(s2),
+        winner: null,
       };
     }
     rounds[2].push(id);
