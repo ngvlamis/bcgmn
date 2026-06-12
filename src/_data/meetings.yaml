@@ -518,6 +518,97 @@
 - name: "June 2026"
   date: "2026-06-11"
   location: "Le Cheile"
+  rounds:
+    - matches:
+        - p1: Lou Carlascio
+          p2: Makoto Nozaki
+          w: 1
+        - p1: Marcus Montenegro
+          p2: Tim Flateman
+          w: 2
+        - p1: Jordan Cohn
+          p2: Jesse Chrismer
+          w: 1
+        - p1: Selwyn Scarborough
+          p2: Ruddy Santana
+          w: 1
+        - p1: Alex Adams
+          p2: Casey Gafry
+          w: 1
+        - p1: Jason Aingorn
+          p2: Nick Vlamis
+          w: 1
+        - p1: Donny Lomuto
+          p2: Alexa Politano
+          w: 2
+        - p1: Monty Haskins
+          p2: Peter Geissler
+          w: 1
+        - p1: Noah Allen
+          p2: Howard Linnemann-Schmidt
+          w: 2
+        - p1: Eddie Rodriguez
+          bye: true
+    - matches:
+        - p1: Lou Carlascio
+          p2: Tim Flateman
+          w: 1
+        - p1: Jordan Cohn
+          p2: Selwyn Scarborough
+          w: 1
+        - p1: Alex Adams
+          p2: Jason Aingorn
+          w: 2
+        - p1: Alexa Politano
+          p2: Monty Haskins
+          w: 2
+        - p1: Howard Linnemann-Schmidt
+          p2: Eddie Rodriguez
+          w: 2
+        - p1: Makoto Nozaki
+          p2: Marcus Montenegro
+          w: 1
+        - p1: Jesse Chrismer
+          p2: Ruddy Santana
+          w: 1
+        - p1: Casey Gafry
+          p2: Nick Vlamis
+          w: 2
+        - p1: Donny Lomuto
+          p2: Peter Geissler
+          w: 1
+        - p1: Noah Allen
+          bye: true
+    - matches:
+        - p1: Lou Carlascio
+          p2: Jordan Cohn
+          w: 2
+        - p1: Jason Aingorn
+          p2: Monty Haskins
+          w: 1
+        - p1: Alexa Politano
+          p2: Howard Linnemann-Schmidt
+          w: 2
+        - p1: Eddie Rodriguez
+          p2: Selwyn Scarborough
+          w: 1
+        - p1: Alex Adams
+          p2: Donny Lomuto
+          w: 1
+        - p1: Noah Allen
+          p2: Makoto Nozaki
+          w: 2
+        - p1: Jesse Chrismer
+          p2: Nick Vlamis
+          w: 2
+        - p1: Tim Flateman
+          p2: Peter Geissler
+          w: 1
+        - p1: Marcus Montenegro
+          bye: true
+        - p1: Ruddy Santana
+          p2: Casey Gafry
+          w: 1
 
 - name: "July 2026"
   date: "2026-07-16"

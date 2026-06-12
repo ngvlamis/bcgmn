@@ -191,7 +191,8 @@ function renderMatch(m) {
   if (m.bye) {
     return `        - p1: ${m.p1}\n          bye: true`;
   }
-  return `        - p1: ${m.p1}\n          p2: ${m.p2}\n          w: ${m.winner}`;
+  const w = m.w !== undefined ? m.w : m.winner;
+  return `        - p1: ${m.p1}\n          p2: ${m.p2}\n          w: ${w}`;
 }
 
 function renderEntry(name, date, loc, rounds) {
