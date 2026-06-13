@@ -245,7 +245,7 @@
           p2: Monty Haskins
           w: 2
         - p1: Selwyn Scarborough
-          p2: Ruddy Santana
+          p2: Rudy Santana
           w: 1
         - p1: Matthew Schneid
           p2: Charlie Eisenhood
@@ -283,7 +283,7 @@
         - p1: Louis Epstein
           p2: Jason Aingorn
           w: 1
-        - p1: Ruddy Santana
+        - p1: Rudy Santana
           p2: Noah Allen
           w: 1
         - p1: Nygel
@@ -331,7 +331,7 @@
           p2: Nygel
           w: 1
         - p1: Nick Vlamis
-          p2: Ruddy Santana
+          p2: Rudy Santana
           w: 1
         - p1: Peter Geissler
           p2: Tim Flateman
@@ -360,7 +360,7 @@
         - p1: Sam Rappaport
           p2: Nick Vlamis
           w: 2
-        - p1: Ruddy Santana
+        - p1: Rudy Santana
           p2: Donny Lomuto
           w: 2
         - p1: Makoto Nozaki
@@ -403,7 +403,7 @@
         - p1: Sam Rappaport
           p2: Jesse Chrismer
           w: 2
-        - p1: Ruddy Santana
+        - p1: Rudy Santana
           p2: Dan Lee
           w: 2
     - matches:
@@ -414,7 +414,7 @@
           p2: Howard Linnemann-Schmidt
           w: 1
         - p1: Tim Flateman
-          p2: Ruddy Santana
+          p2: Rudy Santana
           w: 1
         - p1: Casey Ganfry
           p2: Sam Rappaport
@@ -444,7 +444,7 @@
   rounds:
     - matches:
         - p1: Nick Vlamis
-          p2: Ruddy Santana
+          p2: Rudy Santana
           w: 1
         - p1: Onur Ihtiyar
           p2: Donny Lomuto
@@ -485,7 +485,7 @@
         - p1: Casey Ganfry
           p2: Alex Adams
           w: 1
-        - p1: Ruddy Santana
+        - p1: Rudy Santana
           p2: Jesse Chrismer
           w: 2
         - p1: Donny Lomuto
@@ -509,7 +509,7 @@
         - p1: Howard Linnemann-Schmidt
           p2: Jesse Chrismer
           w: 1
-        - p1: Ruddy Santana
+        - p1: Rudy Santana
           p2: Alex Adams
           w: 2
         - p1: Tim Flateman
@@ -530,7 +530,7 @@
           p2: Jesse Chrismer
           w: 1
         - p1: Selwyn Scarborough
-          p2: Ruddy Santana
+          p2: Rudy Santana
           w: 1
         - p1: Alex Adams
           p2: Casey Gafry
@@ -569,7 +569,7 @@
           p2: Marcus Montenegro
           w: 1
         - p1: Jesse Chrismer
-          p2: Ruddy Santana
+          p2: Rudy Santana
           w: 1
         - p1: Casey Gafry
           p2: Nick Vlamis
@@ -606,7 +606,7 @@
           w: 1
         - p1: Marcus Montenegro
           bye: true
-        - p1: Ruddy Santana
+        - p1: Rudy Santana
           p2: Casey Gafry
           w: 1
 
