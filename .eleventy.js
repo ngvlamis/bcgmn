@@ -43,6 +43,13 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+  eleventyConfig.addFilter("linkEmails", (text) =>
+    String(text).replace(
+      /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g,
+      (email) => `<a href="mailto:${email}">${email}</a>`
+    )
+  );
+
   eleventyConfig.addFilter("dateFormatMonth", (dateStr) => {
     const [y, m] = String(dateStr).split("-").map(Number);
     return new Date(y, m - 1, 1).toLocaleDateString("en-US", {

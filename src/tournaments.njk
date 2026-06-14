@@ -26,6 +26,75 @@ permalink: /tournaments/
   {% else %}
   <div class="meetings">
     {% for meeting in upcoming %}
+    {% if meeting.special %}
+    <div class="meeting-card meeting-card--special" id="meeting-upcoming-{{ loop.index }}">
+      <div class="meeting-header meeting-header--static">
+        <div class="meeting-header-left">
+          <span class="meeting-special-badge">Special Event</span>
+          <span class="meeting-name">{{ meeting.name }}</span>
+          <span class="meeting-date">{{ meeting.date | dateFormat }}{% if meeting.start %} &middot; {{ meeting.start }}{% endif %}</span>
+          <span class="meeting-location">{{ meeting.location }}</span>
+        </div>
+      </div>
+      {% if meeting.info %}
+      <div class="meeting-special-info">{{ meeting.info | linkEmails | safe }}</div>
+      {% endif %}
+      {% if meeting.rounds %}
+      <div class="meeting-body" style="display:block">
+        <table class="tally-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Record</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in meeting.rounds | meetingTally %}
+            <tr>
+              <td>{{ p.name }}</td>
+              <td class="tally-record">
+                {{ p.wins }}-{{ p.losses }}{% if p.byes %} <span class="tally-bye">({{ p.byes }} bye)</span>{% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% for round in meeting.rounds %}
+        <div class="round-section">
+          <button class="round-header" aria-expanded="false">
+            <span>Round {{ loop.index }} Results</span>
+            <span class="round-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="round-body" hidden>
+            <table class="match-table">
+              <thead>
+                <tr>
+                  <th>Player 1</th>
+                  <th>Player 2</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for match in round.matches %}
+                <tr>
+                  <td class="{{ 'is-winner' if match.w == 1 and match.p2 }}">{{ match.p1 }}</td>
+                  <td class="{{ 'is-winner' if match.w == 2 }}">
+                    {%- if match.bye or not match.p2 -%}
+                      <em>bye</em>
+                    {%- else -%}
+                      {{ match.p2 }}
+                    {%- endif -%}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% else %}
     <div class="meeting-card" id="meeting-upcoming-{{ loop.index }}">
       <button class="meeting-header" aria-expanded="false">
         <div class="meeting-header-left">
@@ -98,6 +167,7 @@ permalink: /tournaments/
       </div>
       {% endif %}
     </div>
+    {% endif %}
     {% endfor %}
   </div>
   {% endif %}
@@ -110,6 +180,75 @@ permalink: /tournaments/
   {% else %}
   <div class="meetings">
     {% for meeting in past | reverse %}
+    {% if meeting.special %}
+    <div class="meeting-card meeting-card--special" id="meeting-past-{{ loop.index }}">
+      <div class="meeting-header meeting-header--static">
+        <div class="meeting-header-left">
+          <span class="meeting-special-badge">Special Event</span>
+          <span class="meeting-name">{{ meeting.name }}</span>
+          <span class="meeting-date">{{ meeting.date | dateFormat }}{% if meeting.start %} &middot; {{ meeting.start }}{% endif %}</span>
+          <span class="meeting-location">{{ meeting.location }}</span>
+        </div>
+      </div>
+      {% if meeting.info %}
+      <div class="meeting-special-info">{{ meeting.info | linkEmails | safe }}</div>
+      {% endif %}
+      {% if meeting.rounds %}
+      <div class="meeting-body" style="display:block">
+        <table class="tally-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Record</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in meeting.rounds | meetingTally %}
+            <tr>
+              <td>{{ p.name }}</td>
+              <td class="tally-record">
+                {{ p.wins }}-{{ p.losses }}{% if p.byes %} <span class="tally-bye">({{ p.byes }} bye)</span>{% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% for round in meeting.rounds %}
+        <div class="round-section">
+          <button class="round-header" aria-expanded="false">
+            <span>Round {{ loop.index }} Results</span>
+            <span class="round-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="round-body" hidden>
+            <table class="match-table">
+              <thead>
+                <tr>
+                  <th>Player 1</th>
+                  <th>Player 2</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for match in round.matches %}
+                <tr>
+                  <td class="{{ 'is-winner' if match.w == 1 and match.p2 }}">{{ match.p1 }}</td>
+                  <td class="{{ 'is-winner' if match.w == 2 }}">
+                    {%- if match.bye or not match.p2 -%}
+                      <em>bye</em>
+                    {%- else -%}
+                      {{ match.p2 }}
+                    {%- endif -%}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% else %}
     <div class="meeting-card" id="meeting-past-{{ loop.index }}">
       <button class="meeting-header" aria-expanded="false">
         <div class="meeting-header-left">
@@ -182,6 +321,7 @@ permalink: /tournaments/
       </div>
       {% endif %}
     </div>
+    {% endif %}
     {% endfor %}
   </div>
   {% endif %}

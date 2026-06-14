@@ -10,11 +10,14 @@ module.exports = function () {
 
   const metaByName = Object.fromEntries(meta.map((m) => [m.name, m]));
 
-  const currentYear = new Date().getFullYear();
+  const now = new Date();
+  const cutoff = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate())
+    .toISOString().slice(0, 10);
   const attendance = {};
 
   for (const meeting of meetings) {
-    if (parseInt(String(meeting.date).slice(0, 4)) !== currentYear) continue;
+    if (String(meeting.date) < cutoff) continue;
+    if (meeting.special) continue;
 
     const matches = (meeting.rounds || []).flatMap((r) => r.matches || []);
     const attendees = new Set();
