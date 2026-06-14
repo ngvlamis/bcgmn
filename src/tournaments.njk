@@ -37,7 +37,7 @@ permalink: /tournaments/
         </div>
       </div>
       {% if meeting.info %}
-      <div class="meeting-special-info">{{ meeting.info }}</div>
+      <div class="meeting-special-info">{{ meeting.info | linkEmails | safe }}</div>
       {% endif %}
       {% if meeting.rounds %}
       <div class="meeting-body" style="display:block">
@@ -191,7 +191,7 @@ permalink: /tournaments/
         </div>
       </div>
       {% if meeting.info %}
-      <div class="meeting-special-info">{{ meeting.info }}</div>
+      <div class="meeting-special-info">{{ meeting.info | linkEmails | safe }}</div>
       {% endif %}
       {% if meeting.rounds %}
       <div class="meeting-body" style="display:block">
