@@ -610,6 +610,16 @@
           p2: Casey Gafry
           w: 1
 
+- name: "BCGMN Cup"
+  date: "2026-07-12"
+  location: "Le Cheile"
+  special: true
+  start: "11am"
+  info: >
+    32 player tournament. 
+    Email backgammonclubgmn@gmail.com for availability and registration. 
+
+
 - name: "July 2026"
   date: "2026-07-16"
   location: "Le Cheile"
