@@ -15,6 +15,7 @@ module.exports = function () {
 
   for (const meeting of meetings) {
     if (parseInt(String(meeting.date).slice(0, 4)) !== currentYear) continue;
+    if (meeting.special) continue;
 
     const matches = (meeting.rounds || []).flatMap((r) => r.matches || []);
     const attendees = new Set();
