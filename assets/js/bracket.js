@@ -8,6 +8,13 @@ let state = loadState() || {
   matches: {}, rounds: [], displayNums: {}, tournamentTitle: ''
 };
 
+// Season standings injected by bracket.njk — used to steer the bye toward lower-ranked players.
+const _standingsEl = document.getElementById('standings-data');
+const _standingsData = _standingsEl ? JSON.parse(_standingsEl.textContent) : [];
+const standingsRank = {};
+_standingsData.forEach((p, i) => { standingsRank[p.name.toLowerCase()] = i + 1; });
+const standingsTotal = _standingsData.length;
+
 function loadState() {
   try {
     const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
@@ -550,7 +557,21 @@ function startTournament() {
   if (names.length < 4) return;
   const lower = names.map(n => n.toLowerCase());
   if (new Set(lower).size !== lower.length) return;
-  const { matches, rounds, displayNums } = buildBracket(shuffle(names));
+
+  let ordered = shuffle(names);
+
+  if (ordered.length % 2 === 1) {
+    // Steer the R1 bye toward a lower-half player (by season standings).
+    // Guests (not in standings) are always eligible.
+    const getRank = name => standingsRank[name.toLowerCase()] ?? (standingsTotal + 1);
+    const byRank  = [...ordered].sort((a, b) => getRank(a) - getRank(b));
+    const eligible = byRank.slice(Math.ceil(ordered.length / 2));
+    const pick = eligible[Math.floor(Math.random() * eligible.length)];
+    const idx  = ordered.indexOf(pick);
+    [ordered[idx], ordered[ordered.length - 1]] = [ordered[ordered.length - 1], ordered[idx]];
+  }
+
+  const { matches, rounds, displayNums } = buildBracket(ordered);
   state.matches = matches; state.rounds = rounds; state.displayNums = displayNums;
   state.phase = 'tournament';
   saveState(); render();
