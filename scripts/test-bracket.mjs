@@ -102,10 +102,83 @@ function checkTrial(n) {
   return { rematches, doubleByes };
 }
 
+// ── Bye-recipient R3 pairing check ───────────────────────────────────────────
+
+// Returns per-player record { wins, losses, byes } across R1+R2.
+function buildDetailedRecord(resolved, rounds) {
+  const rec = {};
+  const track = (p, type) => {
+    if (!p || p === 'BYE') return;
+    if (!rec[p]) rec[p] = { wins: 0, losses: 0, byes: 0 };
+    rec[p][type]++;
+  };
+  for (const rid of [0, 1]) {
+    for (const id of rounds[rid]) {
+      const m  = resolved[id];
+      const p1 = resolve(m.p1, resolved);
+      const p2 = m.p2 ? resolve(m.p2, resolved) : null;
+      if (m._isBye || !p2 || p2 === 'BYE') {
+        track(p1, 'byes');
+      } else {
+        track(m.winner === 'p1' ? p1 : p2, 'wins');
+        track(m.winner === 'p1' ? p2 : p1, 'losses');
+      }
+    }
+  }
+  return rec;
+}
+
+// Returns a failure string if the bye recipient's R3 opponent is not a true
+// 2-0 player (two real wins, no bye), or null if the trial passes / is N/A.
+function checkByeRecipientR3(n) {
+  if (n % 2 === 0) return null;
+
+  const players = shuffle(Array.from({ length: n }, (_, i) => `P${i + 1}`));
+  const { matches, rounds } = buildBracket(players);
+  const resolved = simulate(matches);
+
+  const r1ByeMatch = rounds[0].map(id => resolved[id]).find(m => m._isBye);
+  if (!r1ByeMatch) return null;
+
+  const byeRecipient = resolve(r1ByeMatch.p1, resolved);
+
+  // Did the bye recipient win R2?
+  let wonR2 = false;
+  for (const id of rounds[1]) {
+    const m  = resolved[id];
+    if (m._isBye) continue;
+    const p1 = resolve(m.p1, resolved);
+    const p2 = m.p2 ? resolve(m.p2, resolved) : null;
+    if (p1 === byeRecipient) { wonR2 = m.winner === 'p1'; break; }
+    if (p2 === byeRecipient) { wonR2 = m.winner === 'p2'; break; }
+  }
+  if (!wonR2) return null; // lost R2 → not 2-0, skip
+
+  // Find their R3 opponent
+  let r3Opponent = null;
+  for (const id of rounds[2]) {
+    const m  = resolved[id];
+    if (m._isBye) continue;
+    const p1 = resolve(m.p1, resolved);
+    const p2 = m.p2 ? resolve(m.p2, resolved) : null;
+    if (p1 === byeRecipient) { r3Opponent = p2; break; }
+    if (p2 === byeRecipient) { r3Opponent = p1; break; }
+  }
+  if (!r3Opponent) return `${byeRecipient} (bye+win) has no R3 match`;
+
+  // Opponent must have 2 real wins, no bye
+  const rec  = buildDetailedRecord(resolved, rounds);
+  const oRec = rec[r3Opponent] ?? { wins: 0, losses: 0, byes: 0 };
+  if (oRec.wins === 2 && oRec.byes === 0) return null;
+  return `${byeRecipient} (bye+win) faced ${r3Opponent} (${oRec.wins}W-${oRec.losses}L-${oRec.byes}bye) in R3`;
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 const N_TRIALS = 2000;
+let grandTotal = 0;
 
+// Test 1: rematches and double-byes
 console.log(`Stress test: N=15–25, ${N_TRIALS} trials each\n`);
 console.log(`${'N'.padStart(4)}  ${'rematches'.padStart(10)}  ${'double byes'.padStart(12)}  status`);
 console.log('─'.repeat(50));
@@ -138,4 +211,36 @@ console.log(totalFails === 0
   ? `\nAll player counts passed.`
   : `\n${totalFails} player count(s) had failures.`
 );
-process.exit(totalFails > 0 ? 1 : 0);
+grandTotal += totalFails;
+
+// Test 2: bye recipient faces a true 2-0 opponent in R3
+console.log(`\nBye-recipient R3 pairing (odd N only): N=9–25, ${N_TRIALS} trials each\n`);
+console.log(`${'N'.padStart(4)}  ${'failures'.padStart(10)}  status`);
+console.log('─'.repeat(30));
+
+let byeFails = 0;
+
+for (let n = 9; n <= 25; n += 2) {
+  let failTrials = 0;
+  const failEx = [];
+
+  for (let t = 0; t < N_TRIALS; t++) {
+    const fail = checkByeRecipientR3(n);
+    if (fail) { failTrials++; if (failEx.length < 2) failEx.push(fail); }
+  }
+
+  const ok     = failTrials === 0;
+  byeFails    += ok ? 0 : 1;
+  const status = ok ? '✓ PASS' : '✗ FAIL';
+  console.log(`${String(n).padStart(4)}  ${String(failTrials === 0 ? 0 : `${failTrials} trials`).padStart(10)}  ${status}`);
+  if (failEx.length) failEx.forEach(ex => console.log(`       ${ex}`));
+}
+
+console.log('─'.repeat(30));
+console.log(byeFails === 0
+  ? `\nAll player counts passed.`
+  : `\n${byeFails} player count(s) had failures.`
+);
+grandTotal += byeFails;
+
+process.exit(grandTotal > 0 ? 1 : 0);
