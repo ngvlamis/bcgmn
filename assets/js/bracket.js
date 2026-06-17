@@ -114,8 +114,8 @@ function greedyMatch(candidates, adj) {
 // (also excluding dummy — dummy must stay in lGroup so it ends up in
 // llGroup for R3, ensuring the bye goes to a structural 0-2 player).
 // Adds the edge to adj and returns [u, v].
-function crossEdge(fromGroup, toGroup, adj, dummy) {
-  const eligible  = fromGroup.filter(v => v !== dummy);
+function crossEdge(fromGroup, toGroup, adj, dummy, byeExclude = null) {
+  const eligible  = fromGroup.filter(v => v !== dummy && v !== byeExclude);
   const eligibleT = toGroup.filter(v => v !== dummy);
   // most constrained in fromGroup w.r.t. toGroup (excluding dummy)
   let v = eligible[0];
@@ -153,6 +153,11 @@ function buildBracket(players) {
 
   // playerToR1Id: name -> round-1 match id that contains this player
   const playerToR1Id = {};
+  // r1ByeRecipient: the wGroup player who got the R1 bye against dummy.
+  // Used to (a) keep them out of the R2 cross-edge so their R2 is a WW
+  // match, and (b) priority-pair their R3 winner slot inside topPool so
+  // it never spills to mid (which could pair them against a 0-2 player).
+  let r1ByeRecipient = null;
 
   // ── Round 1: direct seed assignments ─────────────────────────
   for (let i = 0; i < N; i += 2) {
@@ -161,6 +166,7 @@ function buildBracket(players) {
     const id  = mk();
     const isBye = v === dummy;
     if (isBye) {
+      r1ByeRecipient = u;
       matches[id] = {
         id, round: 1, group: 'r1',
         p1: { type: 'seed', name: u },
@@ -195,7 +201,7 @@ function buildBracket(players) {
       ...greedyMatch([...lGroup], adj).pairs,
     ];
   } else {
-    const [cv, cu] = crossEdge(wGroup, lGroup, adj, dummy);
+    const [cv, cu] = crossEdge(wGroup, lGroup, adj, dummy, r1ByeRecipient);
     r2PlayerPairs = [
       [cv, cu],
       ...greedyMatch(wGroup.filter(p => p !== cv), adj).pairs,
@@ -315,7 +321,12 @@ function buildBracket(players) {
   }
 
   // ── Slot-graph greedy matching (most-constrained-first). ─────
-  function greedySlotMatch(pool) {
+  // `forbidden` is an optional list of [slotA, slotB] pairs that must
+  // not be paired together even though they pass slotsCanPair.
+  function greedySlotMatch(pool, forbidden = []) {
+    const isForbidden = (a, b) => forbidden.some(([x, y]) =>
+      (x === a && y === b) || (x === b && y === a));
+    const canPair = (a, b) => slotsCanPair(a, b) && !isForbidden(a, b);
     const remaining = [...pool];
     const pairs = [];
     while (remaining.length >= 2) {
@@ -323,7 +334,7 @@ function buildBracket(players) {
       for (let i = 0; i < remaining.length; i++) {
         let c = 0;
         for (let j = 0; j < remaining.length; j++) {
-          if (i !== j && slotsCanPair(remaining[i], remaining[j])) c++;
+          if (i !== j && canPair(remaining[i], remaining[j])) c++;
         }
         if (c < bestCount) { bestCount = c; bestIdx = i; }
       }
@@ -335,11 +346,11 @@ function buildBracket(players) {
       }
       let partnerIdx = -1, bestPC = Infinity;
       for (let j = 0; j < remaining.length; j++) {
-        if (j === bestIdx || !slotsCanPair(v, remaining[j])) continue;
+        if (j === bestIdx || !canPair(v, remaining[j])) continue;
         let pc = 0;
         for (let k = 0; k < remaining.length; k++) {
           if (k === bestIdx || k === j) continue;
-          if (slotsCanPair(remaining[j], remaining[k])) pc++;
+          if (canPair(remaining[j], remaining[k])) pc++;
         }
         if (pc < bestPC) { bestPC = pc; partnerIdx = j; }
       }
@@ -360,7 +371,37 @@ function buildBracket(players) {
   const midPool = r3Slots.filter(s => s.tier === 'mid');
   const botPool = r3Slots.filter(s => s.tier === 'bot');
 
-  const { pairs: topPairs, leftover: topLeft } = greedySlotMatch(topPool);
+  // Bye-recipient priority pre-pair: the R1 bye player is guaranteed 2-0
+  // if they win R2 (we kept them out of the R2 cross-edge above, so their
+  // R2 is always a WW match → winner slot is in topPool). Pair their slot
+  // inside topPool first so it can never become the leftover that spills
+  // to mid and risks facing a 0-2 player.
+  const eddieSlot = r1ByeRecipient
+    ? topPool.find(s => s.matchId === r2IdFor[r1ByeRecipient] && s.outcome === 'winner')
+    : null;
+  const topRemaining = [...topPool];
+  const eddiePairs = [];
+  if (eddieSlot && topRemaining.length >= 2) {
+    topRemaining.splice(topRemaining.indexOf(eddieSlot), 1);
+    let bestPartner = null, bestCount = Infinity;
+    for (const s of topRemaining) {
+      if (!slotsCanPair(eddieSlot, s)) continue;
+      let c = 0;
+      for (const t of topRemaining) {
+        if (t !== s && slotsCanPair(s, t)) c++;
+      }
+      if (c < bestCount) { bestCount = c; bestPartner = s; }
+    }
+    if (bestPartner) {
+      eddiePairs.push([eddieSlot, bestPartner]);
+      topRemaining.splice(topRemaining.indexOf(bestPartner), 1);
+    } else {
+      topRemaining.push(eddieSlot);
+    }
+  }
+
+  const { pairs: topPairsInner, leftover: topLeft } = greedySlotMatch(topRemaining);
+  const topPairs = [...eddiePairs, ...topPairsInner];
 
   const botPairs = [];
   let botLeft = null;
@@ -394,7 +435,13 @@ function buildBracket(players) {
   }
   if (botLeft) midSlots.push(botLeft);
 
-  const { pairs: midPairsInner } = greedySlotMatch(midSlots);
+  // Forbid pairing a top spillover with a bot spillover in mid: a structural
+  // 2-0 slot should never face a structural 0-2 slot. (When the cross-winner
+  // preset above consumed topLeft, this is moot — topLeft is already gone.)
+  const forbidden = (midSlots.includes(topLeft) && midSlots.includes(botLeft))
+    ? [[topLeft, botLeft]]
+    : [];
+  const { pairs: midPairsInner } = greedySlotMatch(midSlots, forbidden);
   const midPairs = [...presetMidPairs, ...midPairsInner];
 
   const r3SlotPairs = [...topPairs, ...midPairs, ...botPairs];
