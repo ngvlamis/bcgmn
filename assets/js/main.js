@@ -55,6 +55,18 @@ document.querySelectorAll(".meeting-header").forEach((btn) => {
   });
 });
 
+// Participants expand/collapse
+document.querySelectorAll(".participants-header").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const section = btn.closest(".participants-section");
+    const body = section.querySelector(".participants-body");
+    const isOpen = !body.hidden;
+    body.hidden = isOpen;
+    btn.setAttribute("aria-expanded", String(!isOpen));
+    section.classList.toggle("is-open", !isOpen);
+  });
+});
+
 // Round expand/collapse
 document.querySelectorAll(".round-header").forEach((btn) => {
   btn.addEventListener("click", () => {
