@@ -39,6 +39,21 @@ permalink: /tournaments/
       {% if meeting.info %}
       <div class="meeting-special-info">{{ meeting.info | linkEmails | safe }}</div>
       {% endif %}
+      {% if meeting.participants %}
+      <div class="participants-section">
+        <button class="participants-header" aria-expanded="false">
+          <span>Registered Players ({{ meeting.participants | length }})</span>
+          <span class="round-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="participants-body" hidden>
+          <ol class="meeting-participants-list">
+            {% for name in meeting.participants %}
+            <li>{{ name }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+      </div>
+      {% endif %}
       {% if meeting.rounds %}
       <div class="meeting-body" style="display:block">
         <table class="tally-table">
@@ -192,6 +207,21 @@ permalink: /tournaments/
       </div>
       {% if meeting.info %}
       <div class="meeting-special-info">{{ meeting.info | linkEmails | safe }}</div>
+      {% endif %}
+      {% if meeting.participants %}
+      <div class="participants-section">
+        <button class="participants-header" aria-expanded="false">
+          <span>Registered Players ({{ meeting.participants | length }})</span>
+          <span class="round-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="participants-body" hidden>
+          <ol class="meeting-participants-list">
+            {% for name in meeting.participants %}
+            <li>{{ name }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+      </div>
       {% endif %}
       {% if meeting.rounds %}
       <div class="meeting-body" style="display:block">
